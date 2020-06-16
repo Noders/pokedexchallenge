@@ -1,0 +1,10 @@
+.input {
+  padding: 16px;
+  /* white */
+
+  background: #ffffff;
+  /* purple500 */
+
+  border: 1px solid #7660de;
+  border-radius: 5px;
+}
