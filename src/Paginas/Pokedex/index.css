@@ -1,0 +1,32 @@
+.poketarjeta {
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 20px;
+    width: 236px;
+    height: 230px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.poketarjeta-cabecera {
+    display: flex;
+    justify-content: space-between;
+}
+
+.poketarjeta-tipos {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.poketarjeta-tipos .tipo {
+    margin-left: 10px;
+}
+
+.tipo {
+    margin-left: 22px;
+}
