@@ -1,14 +1,23 @@
 import React from "react";
 import Pokedex from "./Paginas/Pokedex";
-import Input from "./Componentes/Input";
-import "./App.css";
-import "./normalize.css";
+import Login from "./Paginas/Login";
+import { GlobalFontStyles, GlobalReset, GlobalAppStyles } from "./Estilos";
+
+export const Paginas = {
+  pokedex: Pokedex,
+  login: Login,
+};
 
 function App() {
+  const [paginaActual, setPaginaActual] = React.useState("login");
+  const ComponenteQueNoSeCualEs = Paginas[paginaActual];
   return (
-      <div>
-        <Pokedex />
-      </div>
+    <React.Fragment>
+      <GlobalAppStyles />
+      <GlobalReset />
+      <GlobalFontStyles />
+      <ComponenteQueNoSeCualEs onPageChange={setPaginaActual} />
+    </React.Fragment>
   );
 }
 

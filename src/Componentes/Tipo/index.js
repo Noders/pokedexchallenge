@@ -2,76 +2,72 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import './index.css';
-
 export const tipos = {
-  fuego: 'fuego',
-  volador: 'volador',
-  electrico: 'electrico',
-}
+  fuego: "fuego",
+  volador: "volador",
+  electrico: "electrico",
+};
 
 const mapaDeTipos = {
   [tipos.fuego]: {
     texto: "Fuego🔥",
-    clase: 'tipo-fuego'
+    clase: "tipo-fuego",
   },
   [tipos.volador]: {
     texto: "Volador💨",
-    clase: 'tipo-volador'
+    clase: "tipo-volador",
   },
   [tipos.electrico]: {
-      texto: "Electrico⚡",
-      clase: 'tipo-electrico'
-  }
-}
-
+    texto: "Electrico⚡",
+    clase: "tipo-electrico",
+  },
+};
 
 const fuego = css`
-  background: #FF3021;
-  border: 1px solid #CC261A;
-`
+  background: #ff3021;
+  border: 1px solid #cc261a;
+`;
 
 const volador = css`
-  background: #8D9DFA;
-  border: 1px solid #7985CE;
-`
+  background: #8d9dfa;
+  border: 1px solid #7985ce;
+`;
 const electrico = css`
-  background: #FFC530;
-  border: 1px solid #CC9E26;
-`
+  background: #ffc530;
+  border: 1px solid #cc9e26;
+`;
 
 const StyledDiv = styled.div`
-    display: inline-flex;
-    flex-direction: row;
-    padding: 0px 8px;
-    height: 23px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    align-items: center;
-    color: white;
-    ${({ tipo }) => {
-      if(tipo === tipos.fuego) {
-        return fuego
-      } 
-      if (tipo === tipos.volador) {
-        return volador
-      }
-      if (tipo === tipos.electrico) {
-        return electrico;
-      }
-    }}
-`
+  display: inline-flex;
+  flex-direction: row;
+  padding: 0px 8px;
+  height: 23px;
+  border-radius: 5px;
+  align-items: center;
+  color: white;
+  ${({ tipo }) => {
+    if (tipo === tipos.fuego) {
+      return fuego;
+    }
+    if (tipo === tipos.volador) {
+      return volador;
+    }
+    if (tipo === tipos.electrico) {
+      return electrico;
+    }
+  }}
+`;
 
 function Tipo(props) {
-    const tipo = mapaDeTipos[props.tipo]
-    if (!tipo) {
-      return null
-    }
-    return <StyledDiv tipo={props.tipo}>{tipo.texto}</StyledDiv>;
+  const tipo = mapaDeTipos[props.tipo];
+  if (!tipo) {
+    return null;
+  }
+  return <StyledDiv tipo={props.tipo}>{tipo.texto}</StyledDiv>;
 }
 
 Tipo.propTypes = {
-    tipo: PropTypes.oneOf(Object.keys(tipos)).isRequired
-}
+  tipo: PropTypes.oneOf(Object.keys(tipos)).isRequired,
+};
 
 export default Tipo;
