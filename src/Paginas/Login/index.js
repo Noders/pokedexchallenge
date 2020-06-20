@@ -29,6 +29,21 @@ const InputWrapper = styled.div`
   margin-bottom: 24px;
 `;
 
+const TituloFancy = styled.h1`
+  font-size: 46px;
+  line-height: 72px;
+  font-family: "Rock Salt";
+  position: absolute;
+  margin: 0;
+  top: -100px;
+  left: 50%;
+  transform: rotate(-9deg) translateX(-50%);
+  background: -webkit-linear-gradient(40deg, #7660de, #93e16f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
+`;
+
 function Login({ onPageChange }) {
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -48,6 +63,10 @@ function Login({ onPageChange }) {
     <Pagina>
       <PanelWrapper>
         <Panel>
+          <TituloFancy>
+            30 Dias <br />
+            de React
+          </TituloFancy>
           <InputWrapper>
             <Input onChange={onUsernameChange} label="Username" />
           </InputWrapper>

@@ -1,5 +1,6 @@
-import React from "react";
+import * as React from "react";
 import styled from "styled-components";
+import propTypes from "prop-types";
 
 const StyledInput = styled.input`
   padding: 16px;
@@ -9,12 +10,17 @@ const StyledInput = styled.input`
   width: 100%;
 `;
 
-const Input = ({ label, onChange }) => {
+const Input = ({ label, name, onChange }) => {
   return (
     <div>
-      <label>{label}</label>
-      <br />
+      {label && (
+        <React.Fragment>
+          <label html-for={name}>{label}</label>
+          <br />
+        </React.Fragment>
+      )}
       <StyledInput
+        name={name}
         onChange={onChange}
         className="input"
         type="text"
@@ -22,6 +28,11 @@ const Input = ({ label, onChange }) => {
       />
     </div>
   );
+};
+
+Input.propTypes = {
+  label: propTypes.string,
+  onChange: propTypes.func,
 };
 
 export default Input;

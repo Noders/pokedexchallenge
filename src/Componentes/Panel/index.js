@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 import styled from "styled-components";
 
 const StyledPanel = styled.section`
@@ -8,6 +7,7 @@ const StyledPanel = styled.section`
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.06), 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   width: 100%;
+  position: relative;
 `;
 
 function Panel({ children }) {

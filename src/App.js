@@ -9,7 +9,7 @@ export const Paginas = {
 };
 
 function App() {
-  const [paginaActual, setPaginaActual] = React.useState("login");
+  const [paginaActual, setPaginaActual] = React.useState("pokedex");
   const ComponenteQueNoSeCualEs = Paginas[paginaActual];
   return (
     <React.Fragment>
