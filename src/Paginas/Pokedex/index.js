@@ -11,25 +11,32 @@ const CardsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-let pokemonesFiltrados = pokemons;
-let ListaDePokeTarjetas = pokemonesFiltrados.map((pokemon) => {
-  const { name: nombre, id, images, type: tipos } = pokemon;
-  return [
-    nombre,
-    <PokeTarjeta
-      nombre={nombre.english}
-      key={id}
-      id={id.toString().padStart((3, "0"))}
-      imagen={images.thumbnail}
-      tipos={tipos}
-    />,
-  ];
-});
+let pokemonesFiltrados = pokemons.slice(0, 151);
 
-function Pokedex() {
+function Pokedex({ alternarFavorito, favoritos }) {
   const [filter, setFilter] = React.useState("");
-  const pokeTarjetasFiltradas = ListaDePokeTarjetas.filter(([nombre]) =>
-    nombre.english.toLowerCase().includes(filter)
+  const pokeTarjetasFiltradas = React.useMemo(
+    () =>
+      pokemonesFiltrados
+        .filter(({ name }) => name.english.toLowerCase().includes(filter))
+        .map((pokemon) => {
+          const { name: nombre, id, type: tipos } = pokemon;
+          const parsedId = id.toString().padStart(3, "0");
+          const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
+
+          return (
+            <PokeTarjeta
+              nombre={nombre.english}
+              key={id}
+              id={parsedId}
+              imagen={url}
+              tipos={tipos}
+              esFavorito={favoritos.has(id)}
+              alternarFavorito={() => alternarFavorito(id)}
+            />
+          );
+        }),
+    [alternarFavorito, favoritos, filter]
   );
 
   return (
@@ -40,9 +47,7 @@ function Pokedex() {
           setFilter(evento.target.value);
         }}
       />
-      <CardsWrapper>
-        {pokeTarjetasFiltradas.map((pokeTarjeta) => pokeTarjeta[1])}
-      </CardsWrapper>
+      <CardsWrapper>{pokeTarjetasFiltradas}</CardsWrapper>
     </React.Fragment>
   );
 }

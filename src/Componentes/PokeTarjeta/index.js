@@ -1,6 +1,7 @@
 import React from "react";
 import Tipo, { tipos } from "../../Componentes/Tipo";
 import { Title, Body14 } from "../../Componentes/Tipografia";
+import { Favorito } from "../../Componentes/Favorito";
 import styled from "styled-components";
 import propTypes from "prop-types";
 
@@ -49,6 +50,7 @@ const PokeImagen = styled.img`
 const PokeCabecera = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 `;
 
 const ContenedorDeTipos = styled.div`
@@ -56,22 +58,51 @@ const ContenedorDeTipos = styled.div`
   justify-content: flex-end;
 `;
 
-export function PokeTarjeta({ nombre, id, imagen, tipos }) {
+export function PokeTarjeta({
+  nombre,
+  id,
+  imagen,
+  tipos,
+  alternarFavorito,
+  esFavorito,
+}) {
+  const [render, setRender] = React.useState(false);
+  React.useEffect(() => {
+    const handle = window.requestIdleCallback(() => {
+      setRender(true);
+    });
+    // We need to return different cleanup functions depending on the branch taken here
+    return () => window.cancelIdleCallback(handle);
+  }, [id]);
   return (
     <PoketarjetaWrapper>
-      <PokeCabecera>
-        <Title>{nombre}</Title> <Body14>#{id}</Body14>
-      </PokeCabecera>
-      <PokeCuerpo>
-        <PokeImagen src={`data:image/png;base64, ${imagen}`} />
-      </PokeCuerpo>
-      <ContenedorDeTipos>
-        {tipos.map((tipo) => {
-          return (
-            <Tipo key={tipo} tipo={mapaDeTipos[tipo]} tipo-original={tipo} />
-          );
-        })}
-      </ContenedorDeTipos>
+      {render ? (
+        <React.Fragment>
+          <PokeCabecera>
+            <span>
+              <Title>{nombre}</Title>
+              <Favorito onClick={alternarFavorito} esFavorito={esFavorito} />
+            </span>
+            <Body14>#{id}</Body14>
+          </PokeCabecera>
+          <PokeCuerpo>
+            <PokeImagen src={imagen} />
+          </PokeCuerpo>
+          <ContenedorDeTipos>
+            {tipos.map((tipo) => {
+              return (
+                <Tipo
+                  key={tipo}
+                  tipo={mapaDeTipos[tipo]}
+                  tipo-original={tipo}
+                />
+              );
+            })}
+          </ContenedorDeTipos>
+        </React.Fragment>
+      ) : (
+        <div>Loading</div>
+      )}
     </PoketarjetaWrapper>
   );
 }
