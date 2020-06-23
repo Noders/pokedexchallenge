@@ -21,7 +21,7 @@ const secundario = css`
   border-color: #9378ff;
 `;
 
-const Button = styled.button`
+const baseButtonStyle = css`
   display: flex;
   flex-direction: column;
   height: 40px;
@@ -37,6 +37,10 @@ const Button = styled.button`
   &:focus {
     box-shadow: 0px 0px 8px rgba(135, 206, 250, 0.75);
   }
+`;
+
+const Button = styled.button`
+  ${baseButtonStyle}
   ${(props) => {
     if (props.tipo === "secundario") {
       return secundario;

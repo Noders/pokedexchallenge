@@ -2,50 +2,53 @@ import React from "react";
 import Pokedex from "./Paginas/Pokedex";
 import Login from "./Paginas/Login";
 import Favoritos from "./Paginas/Favoritos";
+import { Navigation } from "./Componentes/Navigation";
 import { GlobalFontStyles, GlobalReset, GlobalAppStyles } from "./Estilos";
-import Boton from "./Componentes/Boton";
-import styled from "styled-components";
-
-const Nav = styled.nav`
-  display: inline-flex;
-`;
-
-export const Paginas = {
-  pokedex: Pokedex,
-  login: Login,
-  favoritos: Favoritos,
-};
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-  const [paginaActual, setPaginaActual] = React.useState("pokedex");
   const [favoritos, setFavoritos] = React.useState(new Set());
-  const ComponenteQueNoSeCualEs = Paginas[paginaActual];
+
+  const aleternarFavoritos = React.useCallback((idFavorito) => {
+    setFavoritos((favoritos) => {
+      const newFavoritos = new Set(favoritos);
+      if (favoritos.has(idFavorito)) {
+        newFavoritos.delete(idFavorito);
+      } else {
+        newFavoritos.add(idFavorito);
+      }
+      return newFavoritos;
+    });
+  }, []);
+
   return (
     <React.Fragment>
-      <GlobalAppStyles />
-      <GlobalReset />
-      <GlobalFontStyles />
-      <Nav>
-        <Boton onClick={() => setPaginaActual("pokedex")}>Ir a Pokedex</Boton>
-        <Boton onClick={() => setPaginaActual("favoritos")}>
-          Ir a Favoritos
-        </Boton>
-      </Nav>
-      <ComponenteQueNoSeCualEs
-        onPageChange={setPaginaActual}
-        favoritos={favoritos}
-        alternarFavorito={(idFavorito) => {
-          setFavoritos((favoritos) => {
-            const newFavoritos = new Set(favoritos);
-            if (favoritos.has(idFavorito)) {
-              newFavoritos.delete(idFavorito);
-            } else {
-              newFavoritos.add(idFavorito);
-            }
-            return newFavoritos;
-          });
-        }}
-      />
+      <Router>
+        <GlobalAppStyles />
+        <GlobalReset />
+        <GlobalFontStyles />
+        <Navigation />
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/pokedex">
+            <Pokedex
+              favoritos={favoritos}
+              alternarFavorito={aleternarFavoritos}
+            />
+          </Route>
+          <Route path="/favoritos">
+            <Favoritos
+              favoritos={favoritos}
+              alternarFavorito={aleternarFavoritos}
+            />
+          </Route>
+          <Route path="/">
+            <div>hola</div>
+          </Route>
+        </Switch>
+      </Router>
     </React.Fragment>
   );
 }

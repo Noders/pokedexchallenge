@@ -3,6 +3,7 @@ import Boton from "../../Componentes/Boton";
 import Input from "../../Componentes/Input";
 import Panel from "../../Componentes/Panel";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const UserFalso = {
   username: "LCJURY",
@@ -44,9 +45,11 @@ const TituloFancy = styled.h1`
   pointer-events: none;
 `;
 
-function Login({ onPageChange }) {
+function Login() {
+  const history = useHistory();
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
+  console.log({ history });
   const onUsernameChange = (evento) => {
     setUserName(evento.target.value);
   };
@@ -55,7 +58,7 @@ function Login({ onPageChange }) {
   };
   const intentarLoginAsincrono = () => {
     if (userName === UserFalso.username && password === UserFalso.password) {
-      onPageChange("pokedex");
+      history.push("/pokedex");
     }
   };
 
