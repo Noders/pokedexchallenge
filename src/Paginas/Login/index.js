@@ -45,7 +45,7 @@ const TituloFancy = styled.h1`
   pointer-events: none;
 `;
 
-function Login() {
+function Login({ enLoginExitoso }) {
   const history = useHistory();
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -58,7 +58,7 @@ function Login() {
   };
   const intentarLoginAsincrono = () => {
     if (userName === UserFalso.username && password === UserFalso.password) {
-      history.push("/pokedex");
+      enLoginExitoso();
     }
   };
 
