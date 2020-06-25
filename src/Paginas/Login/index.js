@@ -46,10 +46,8 @@ const TituloFancy = styled.h1`
 `;
 
 function Login({ enLoginExitoso }) {
-  const history = useHistory();
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
-  console.log({ history });
   const onUsernameChange = (evento) => {
     setUserName(evento.target.value);
   };

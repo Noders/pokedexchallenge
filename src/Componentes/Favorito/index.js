@@ -1,6 +1,6 @@
 import React from "react";
 import { Estrella } from "../Svgs";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Wrapper = styled.span`
   color: ${({ esFavorito }) => (esFavorito ? "gold" : "white")};
