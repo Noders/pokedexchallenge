@@ -6,7 +6,6 @@ import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 
 const AuthenticatedRouter = ({ favoritos, alternarFavoritos, autenticado }) => {
   if (!autenticado) {
-    console.log("te voy a mandar al login!");
     return <Redirect to="/login" />;
   }
   return (

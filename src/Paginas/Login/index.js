@@ -3,7 +3,6 @@ import Boton from "../../Componentes/Boton";
 import Input from "../../Componentes/Input";
 import Panel from "../../Componentes/Panel";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
 const UserFalso = {
   username: "LCJURY",

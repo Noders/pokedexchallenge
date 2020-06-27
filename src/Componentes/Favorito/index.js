@@ -12,7 +12,11 @@ const Wrapper = styled.span`
 `;
 
 export const Favorito = ({ onClick, esFavorito }) => (
-  <Wrapper esFavorito={esFavorito} onClick={onClick}>
+  <Wrapper
+    data-testid={`favorito-${esFavorito}`}
+    esFavorito={esFavorito}
+    onClick={onClick}
+  >
     <Estrella />
   </Wrapper>
 );

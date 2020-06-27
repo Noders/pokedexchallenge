@@ -58,6 +58,22 @@ const ContenedorDeTipos = styled.div`
   justify-content: flex-end;
 `;
 
+const isServerSideRendering = typeof window === "undefined";
+const useDeferedRendering = () => {
+  const [render, setRender] = React.useState(isServerSideRendering);
+  React.useEffect(() => {
+    if (isServerSideRendering) {
+      return;
+    }
+    const handle = window.requestIdleCallback(() => {
+      setRender(true);
+    });
+    // We need to return different cleanup functions depending on the branch taken here
+    return () => window.cancelIdleCallback(handle);
+  }, []);
+  return render;
+};
+
 export function PokeTarjeta({
   nombre,
   id,
@@ -66,19 +82,13 @@ export function PokeTarjeta({
   alternarFavorito,
   esFavorito,
 }) {
-  const [render, setRender] = React.useState(false);
-  React.useEffect(() => {
-    const handle = window.requestIdleCallback(() => {
-      setRender(true);
-    });
-    // We need to return different cleanup functions depending on the branch taken here
-    return () => window.cancelIdleCallback(handle);
-  }, [id]);
+  const render = useDeferedRendering(true);
+
   return (
-    <PoketarjetaWrapper>
+    <PoketarjetaWrapper data-testid="poke-tarjeta">
       {render ? (
         <React.Fragment>
-          <PokeCabecera>
+          <PokeCabecera data-testid="poke-cabecera">
             <span>
               <Title>{nombre}</Title>
               <Favorito onClick={alternarFavorito} esFavorito={esFavorito} />
