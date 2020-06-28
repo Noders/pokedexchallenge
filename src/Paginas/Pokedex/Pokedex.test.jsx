@@ -13,9 +13,8 @@ afterEach(() => {
 
 test('Renderiza pokemones en Loading', async () => {
   const renderResult = render(<Pokedex favoritos={new Set()} />);
-  const data = await renderResult.findAllByTestId('poke-tarjeta');
+  const data = await renderResult.findAllByText('Loading');
   expect(data.length).toBe(151);
-  ensureMocksReset();
 });
 
 test('Renderiza pokemones', async () => {
