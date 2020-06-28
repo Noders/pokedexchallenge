@@ -1,13 +1,13 @@
-import React from "react";
-import { Router } from "./Componentes/Router";
-import { Navigation } from "./Componentes/Navigation";
-import { GlobalFontStyles, GlobalReset, GlobalAppStyles } from "./Estilos";
-import { BrowserRouter } from "react-router-dom";
-import { useLocalStorage } from "./Hooks";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from './Componentes/Router';
+import { Navigation } from './Componentes/Navigation';
+import { GlobalFontStyles, GlobalReset, GlobalAppStyles } from './Estilos';
+import { useLocalStorage } from './Hooks';
 
 function App() {
-  const [favoritos, setFavoritos] = useLocalStorage("favoritos", []);
-  const [autenticado, setAutenticado] = useLocalStorage("autenticado", false);
+  const [favoritos, setFavoritos] = useLocalStorage('favoritos', []);
+  const [autenticado, setAutenticado] = useLocalStorage('autenticado', false);
   const nuestroSetDeFavoritos = new Set(favoritos);
 
   const alternarFavoritos = (idFavorito) => {
@@ -20,7 +20,7 @@ function App() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <GlobalAppStyles />
       <GlobalReset />
       <GlobalFontStyles />
@@ -33,7 +33,7 @@ function App() {
           alternarFavoritos={alternarFavoritos}
         />
       </BrowserRouter>
-    </React.Fragment>
+    </>
   );
 }
 

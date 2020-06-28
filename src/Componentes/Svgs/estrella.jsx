@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const Estrella = ({ tamano = 14 }) => (
   <svg

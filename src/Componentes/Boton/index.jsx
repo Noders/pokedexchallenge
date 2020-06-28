@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 const primario = css`
   color: #ffffff;
@@ -42,7 +42,7 @@ const baseButtonStyle = css`
 const Button = styled.button`
   ${baseButtonStyle}
   ${(props) => {
-    if (props.tipo === "secundario") {
+    if (props.tipo === 'secundario') {
       return secundario;
     }
     return primario;

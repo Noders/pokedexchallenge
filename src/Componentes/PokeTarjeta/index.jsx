@@ -1,9 +1,9 @@
-import React from "react";
-import Tipo, { tipos } from "../../Componentes/Tipo";
-import { Title, Body14 } from "../../Componentes/Tipografia";
-import { Favorito } from "../../Componentes/Favorito";
-import styled from "styled-components";
-import propTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import propTypes from 'prop-types';
+import Tipo, { tipos } from '../Tipo';
+import { Title, Body14 } from '../Tipografia';
+import { Favorito } from '../Favorito';
 
 const mapaDeTipos = {
   Fire: tipos.fuego,
@@ -58,7 +58,7 @@ const ContenedorDeTipos = styled.div`
   justify-content: flex-end;
 `;
 
-const isServerSideRendering = typeof window === "undefined";
+const isServerSideRendering = typeof window === 'undefined';
 const useDeferedRendering = () => {
   const [render, setRender] = React.useState(isServerSideRendering);
   React.useEffect(() => {
@@ -87,29 +87,30 @@ export function PokeTarjeta({
   return (
     <PoketarjetaWrapper data-testid="poke-tarjeta">
       {render ? (
-        <React.Fragment>
+        <>
           <PokeCabecera data-testid="poke-cabecera">
             <span>
               <Title>{nombre}</Title>
               <Favorito onClick={alternarFavorito} esFavorito={esFavorito} />
             </span>
-            <Body14>#{id}</Body14>
+            <Body14>
+              #
+              {id}
+            </Body14>
           </PokeCabecera>
           <PokeCuerpo>
             <PokeImagen src={imagen} />
           </PokeCuerpo>
           <ContenedorDeTipos>
-            {tipos.map((tipo) => {
-              return (
-                <Tipo
-                  key={tipo}
-                  tipo={mapaDeTipos[tipo]}
-                  tipo-original={tipo}
-                />
-              );
-            })}
+            {tipos.map((tipo) => (
+              <Tipo
+                key={tipo}
+                tipo={mapaDeTipos[tipo]}
+                tipo-original={tipo}
+              />
+            ))}
           </ContenedorDeTipos>
-        </React.Fragment>
+        </>
       ) : (
         <div>Loading</div>
       )}

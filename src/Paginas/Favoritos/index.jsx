@@ -1,8 +1,8 @@
-import React from "react";
-import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { getPokemonById } from "@fforres/pokemon-local-database";
+import { getPokemonById } from '@fforres/pokemon-local-database';
+import { PokeTarjeta } from '../../Componentes/PokeTarjeta';
 
 const CardsWrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ function Favoritos({ favoritos, alternarFavorito }) {
     <CardsWrapper>
       {Array.from(favoritos).map((idFavorito) => {
         const pokemon = getPokemonById(idFavorito);
-        const parsedId = pokemon.id.toString().padStart(3, "0");
+        const parsedId = pokemon.id.toString().padStart(3, '0');
         const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
         return (
           <PokeTarjeta

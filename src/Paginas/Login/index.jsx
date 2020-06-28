@@ -1,12 +1,12 @@
-import React from "react";
-import Boton from "../../Componentes/Boton";
-import Input from "../../Componentes/Input";
-import Panel from "../../Componentes/Panel";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import Boton from '../../Componentes/Boton';
+import Input from '../../Componentes/Input';
+import Panel from '../../Componentes/Panel';
 
 const UserFalso = {
-  username: "LCJURY",
-  password: "44554",
+  username: 'LCJURY',
+  password: '44554',
 };
 
 const Pagina = styled.main`
@@ -45,8 +45,8 @@ const TituloFancy = styled.h1`
 `;
 
 function Login({ enLoginExitoso }) {
-  const [userName, setUserName] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [userName, setUserName] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const onUsernameChange = (evento) => {
     setUserName(evento.target.value);
   };
@@ -64,7 +64,9 @@ function Login({ enLoginExitoso }) {
       <PanelWrapper>
         <Panel>
           <TituloFancy>
-            30 Dias <br />
+            30 Dias
+            {' '}
+            <br />
             de React
           </TituloFancy>
           <InputWrapper>
