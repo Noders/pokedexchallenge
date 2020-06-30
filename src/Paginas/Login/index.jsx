@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Boton from '../../Componentes/Boton';
+import PropTypes from 'prop-types';
+import { Boton } from '../../Componentes/Boton';
 import Input from '../../Componentes/Input';
 import Panel from '../../Componentes/Panel';
 
@@ -84,5 +85,9 @@ function Login({ enLoginExitoso }) {
     </Pagina>
   );
 }
+
+Login.propTypes = {
+  enLoginExitoso: PropTypes.bool.isRequired,
+};
 
 export default Login;

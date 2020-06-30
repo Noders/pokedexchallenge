@@ -35,7 +35,6 @@ function Favoritos({ favoritos, alternarFavorito }) {
 }
 
 Favoritos.propTypes = {
-
   favoritos: PropTypes.instanceOf(Set).isRequired,
   alternarFavorito: PropTypes.func.isRequired,
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Switch, Route, Redirect, useHistory,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Pokedex from '../../Paginas/Pokedex';
 import Login from '../../Paginas/Login';
 import Favoritos from '../../Paginas/Favoritos';
@@ -23,6 +24,12 @@ const AuthenticatedRouter = ({ favoritos, alternarFavoritos, autenticado }) => {
       </Route>
     </Switch>
   );
+};
+
+AuthenticatedRouter.propTypes = {
+  favoritos: PropTypes.instanceOf(Set).isRequired,
+  alternarFavoritos: PropTypes.func.isRequired,
+  autenticado: PropTypes.bool.isRequired,
 };
 
 export const Router = ({
@@ -53,4 +60,11 @@ export const Router = ({
       />
     </Switch>
   );
+};
+
+Router.propTypes = {
+  setAutenticado: PropTypes.instanceOf(Set).isRequired,
+  autenticado: PropTypes.isRequired,
+  favoritos: PropTypes.instanceOf(Set).isRequired,
+  alternarFavoritos: PropTypes.func.isRequired,
 };

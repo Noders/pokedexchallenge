@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledPanel = styled.section`
   padding: 32px;
@@ -13,5 +14,9 @@ const StyledPanel = styled.section`
 function Panel({ children }) {
   return <StyledPanel>{children}</StyledPanel>;
 }
+
+Panel.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default Panel;

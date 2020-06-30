@@ -1,6 +1,7 @@
 import React from 'react';
 import { getPokemonsByNames } from '@fforres/pokemon-local-database';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { PokeTarjeta } from '../../Componentes/PokeTarjeta';
 import Input from '../../Componentes/Input';
 
@@ -51,5 +52,10 @@ function Pokedex({ alternarFavorito, favoritos }) {
     </>
   );
 }
+
+Pokedex.propTypes = {
+  favoritos: PropTypes.instanceOf(Set).isRequired,
+  alternarFavorito: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default Pokedex;

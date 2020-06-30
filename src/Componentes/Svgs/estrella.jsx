@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const Estrella = ({ tamano = 14 }) => (
+export const Estrella = ({ tamano }) => (
   <svg
     width={tamano}
     height={tamano}
@@ -17,3 +18,11 @@ export const Estrella = ({ tamano = 14 }) => (
     />
   </svg>
 );
+
+Estrella.propTypes = {
+  tamano: PropTypes.number,
+};
+
+Estrella.defaultProps = {
+  tamano: 14,
+};

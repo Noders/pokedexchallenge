@@ -14,7 +14,7 @@ const Input = ({ label, name, onChange }) => (
   <div>
     {label && (
     <>
-      <label html-for={name}>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <br />
     </>
     )}
@@ -30,7 +30,12 @@ const Input = ({ label, name, onChange }) => (
 
 Input.propTypes = {
   label: propTypes.string,
-  onChange: propTypes.func,
+  onChange: propTypes.func.isRequired,
+  name: propTypes.string.isRequired,
+};
+
+Input.defaultProps = {
+  label: null,
 };
 
 export default Input;

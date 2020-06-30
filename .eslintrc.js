@@ -20,5 +20,6 @@ module.exports = {
     'jest',
   ],
   rules: {
+    'import/prefer-default-export': 0,
   },
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Estrella } from '../Svgs';
 
 const Wrapper = styled.span`
@@ -20,3 +21,8 @@ export const Favorito = ({ onClick, esFavorito }) => (
     <Estrella />
   </Wrapper>
 );
+
+Favorito.propTypes = {
+  esFavorito: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 
 const primario = css`
   color: #ffffff;
@@ -49,12 +50,14 @@ const Button = styled.button`
   }}
 `;
 
-function Boton({ onClick, tipo, children }) {
-  return (
-    <Button onClick={onClick} tipo={tipo}>
-      {children}
-    </Button>
-  );
-}
+export const Boton = ({ onClick, tipo, children }) => (
+  <Button onClick={onClick} tipo={tipo}>
+    {children}
+  </Button>
+);
 
-export default Boton;
+Boton.propTypes = {
+  tipo: PropTypes.oneOf(['primario', 'secundario']).isRequired,
+  children: PropTypes.element.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

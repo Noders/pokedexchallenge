@@ -1,8 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
 import styled from 'styled-components';
-import Boton from '../Boton';
+import { Boton } from '../Boton';
 
 const Nav = styled.nav`
   display: inline-flex;

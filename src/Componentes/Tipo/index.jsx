@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-export const tipos = {
+export const pokeTipos = {
   fuego: 'fuego',
   volador: 'volador',
   electrico: 'electrico',
@@ -106,39 +106,39 @@ const StyledDiv = styled.div`
   color: white;
   ${({ tipo }) => {
     switch (tipo) {
-      case tipos.fuego:
+      case pokeTipos.fuego:
         return fuego;
-      case tipos.volador:
+      case pokeTipos.volador:
         return volador;
-      case tipos.electrico:
+      case pokeTipos.electrico:
         return electrico;
-      case tipos.luchador:
+      case pokeTipos.luchador:
         return luchador;
-      case tipos.veneno:
+      case pokeTipos.veneno:
         return veneno;
-      case tipos.insecto:
+      case pokeTipos.insecto:
         return insecto;
-      case tipos.planta:
+      case pokeTipos.planta:
         return planta;
-      case tipos.oscuridad:
+      case pokeTipos.oscuridad:
         return oscuridad;
-      case tipos.hielo:
+      case pokeTipos.hielo:
         return hielo;
-      case tipos.psiquico:
+      case pokeTipos.psiquico:
         return psiquico;
-      case tipos.dragon:
+      case pokeTipos.dragon:
         return dragon;
-      case tipos.fantasma:
+      case pokeTipos.fantasma:
         return fantasma;
-      case tipos.metal:
+      case pokeTipos.metal:
         return metal;
-      case tipos.agua:
+      case pokeTipos.agua:
         return agua;
-      case tipos.roca:
+      case pokeTipos.roca:
         return roca;
-      case tipos.tierra:
+      case pokeTipos.tierra:
         return tierra;
-      case tipos.hada:
+      case pokeTipos.hada:
         return hada;
       default:
         return normal;
@@ -146,12 +146,12 @@ const StyledDiv = styled.div`
   }}
 `;
 
-function Tipo(props) {
-  return <StyledDiv tipo={props.tipo}>{tipos[props.tipo]}</StyledDiv>;
+function Tipo({ tipo }) {
+  return <StyledDiv tipo={tipo}>{pokeTipos[tipo]}</StyledDiv>;
 }
 
 Tipo.propTypes = {
-  tipo: PropTypes.oneOf(Object.keys(tipos)).isRequired,
+  tipo: PropTypes.oneOf(Object.keys(pokeTipos)).isRequired,
 };
 
 export default Tipo;

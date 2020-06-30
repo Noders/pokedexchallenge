@@ -1,29 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
-import Tipo, { tipos } from '../Tipo';
+import Tipo, { pokeTipos } from '../Tipo';
 import { Title, Body14 } from '../Tipografia';
 import { Favorito } from '../Favorito';
 
 const mapaDeTipos = {
-  Fire: tipos.fuego,
-  Flying: tipos.volador,
-  Electric: tipos.electrico,
-  Grass: tipos.planta,
-  Poison: tipos.veneno,
-  Normal: tipos.normal,
-  Ground: tipos.tierra,
-  Rock: tipos.roca,
-  Bug: tipos.insecto,
-  Ghost: tipos.fantasma,
-  Steel: tipos.metal,
-  Water: tipos.agua,
-  Psychic: tipos.psiquico,
-  Ice: tipos.hielo,
-  Dragon: tipos.dragon,
-  Dark: tipos.veneno,
-  Fairy: tipos.hada,
-  Fighting: tipos.luchador,
+  Fire: pokeTipos.fuego,
+  Flying: pokeTipos.volador,
+  Electric: pokeTipos.electrico,
+  Grass: pokeTipos.planta,
+  Poison: pokeTipos.veneno,
+  Normal: pokeTipos.normal,
+  Ground: pokeTipos.tierra,
+  Rock: pokeTipos.roca,
+  Bug: pokeTipos.insecto,
+  Ghost: pokeTipos.fantasma,
+  Steel: pokeTipos.metal,
+  Water: pokeTipos.agua,
+  Psychic: pokeTipos.psiquico,
+  Ice: pokeTipos.hielo,
+  Dragon: pokeTipos.dragon,
+  Dark: pokeTipos.veneno,
+  Fairy: pokeTipos.hada,
+  Fighting: pokeTipos.luchador,
 };
 
 const PoketarjetaWrapper = styled.div`
@@ -63,7 +63,7 @@ const useDeferedRendering = () => {
   const [render, setRender] = React.useState(isServerSideRendering);
   React.useEffect(() => {
     if (isServerSideRendering) {
-      return;
+      return () => {};
     }
     const handle = window.requestIdleCallback(() => {
       setRender(true);
@@ -122,6 +122,8 @@ PokeTarjeta.propTypes = {
   id: propTypes.string.isRequired,
   imagen: propTypes.string.isRequired,
   tipos: propTypes.arrayOf(propTypes.string).isRequired,
+  alternarFavorito: propTypes.arrayOf(propTypes.string).isRequired,
+  esFavorito: propTypes.bool.isRequired,
 };
 
 export default React.memo(PokeTarjeta);
