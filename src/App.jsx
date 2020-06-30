@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Router } from './Componentes/Router';
 import { Navigation } from './Componentes/Navigation';
-import { GlobalFontStyles, GlobalReset, GlobalAppStyles } from './Estilos';
+import { GlobalFontStyles, GlobalReset, GlobalAppStyles, Tema } from './Estilos';
 import { useLocalStorage } from './Hooks';
+import { ThemeProvider } from 'styled-components';
 
 function App() {
   const [favoritos, setFavoritos] = useLocalStorage('favoritos', []);
@@ -20,7 +21,7 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider theme={Tema}>
       <GlobalAppStyles />
       <GlobalReset />
       <GlobalFontStyles />
@@ -33,7 +34,7 @@ function App() {
           alternarFavoritos={alternarFavoritos}
         />
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   );
 }
 

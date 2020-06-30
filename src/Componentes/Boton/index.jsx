@@ -2,26 +2,32 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-const primario = css`
-  color: #ffffff;
-  background-color: #9378ff;
-  border-color: #9378ff;
-  &:hover {
-    background-color: #9e83ff;
-    border-color: #9e83ff;
-  }
-  &:active {
-    background-color: #7660de;
-    border-color: #7660de;
-  }
-`;
+const primario = css(({theme}) => {
+    const {colores} = theme;
+    return {
+        color: colores.white,
+        backgroundColor: colores.purpleBaseline,
+        borderColor: colores.purpleBaseline,
+        '&:hover': {
+            backgroundColor: colores.purple200,
+            borderColor: colores.purple200,
+        },
+        '&:active': {
+            backgroundColor: colores.purple500,
+            borderColor: colores.purple500,
+        }
+    };
+});
 
-const secundario = css`
-  color: #9378ff;
-  background-color: #ffffff;
-  border-color: #9378ff;
-`;
-
+const secundario = css(({theme}) => {
+    const {colores} = theme;
+    return {
+        color: colores.purpleBaseline,
+        backgroundColor: colores.white,
+        borderColor: colores.purpleBaseline,
+    };
+});
+  
 const baseButtonStyle = css`
   display: flex;
   flex-direction: column;
