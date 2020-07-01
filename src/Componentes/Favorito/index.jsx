@@ -23,6 +23,6 @@ export const Favorito = ({ onClick, esFavorito }) => (
 );
 
 Favorito.propTypes = {
-  esFavorito: PropTypes.func.isRequired,
+  esFavorito: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };

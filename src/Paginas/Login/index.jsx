@@ -71,14 +71,14 @@ function Login({ enLoginExitoso }) {
             de React
           </TituloFancy>
           <InputWrapper>
-            <Input onChange={onUsernameChange} label="Username" />
+            <Input onChange={onUsernameChange} label="Username" name="username" />
           </InputWrapper>
           <InputWrapper>
-            <Input onChange={onPasswordChange} label="Password" />
+            <Input onChange={onPasswordChange} label="Password" name="password" />
           </InputWrapper>
           <ButtonWrapper>
             <Boton onClick={intentarLoginAsincrono}>Ingresar</Boton>
-            <Boton tipo="secundario">?????</Boton>
+            <Boton onClick={() => {}} tipo="secundario">?????</Boton>
           </ButtonWrapper>
         </Panel>
       </PanelWrapper>
@@ -87,7 +87,7 @@ function Login({ enLoginExitoso }) {
 }
 
 Login.propTypes = {
-  enLoginExitoso: PropTypes.bool.isRequired,
+  enLoginExitoso: PropTypes.func.isRequired,
 };
 
 export default Login;

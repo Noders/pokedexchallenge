@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 import { Router } from './Componentes/Router';
 import { Navigation } from './Componentes/Navigation';
-import { GlobalFontStyles, GlobalReset, GlobalAppStyles, Tema } from './Estilos';
+import {
+  GlobalFontStyles, GlobalReset, GlobalAppStyles, Tema,
+} from './Estilos';
 import { useLocalStorage } from './Hooks';
-import { ThemeProvider } from 'styled-components';
 
 function App() {
   const [favoritos, setFavoritos] = useLocalStorage('favoritos', []);

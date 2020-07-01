@@ -93,10 +93,7 @@ export function PokeTarjeta({
               <Title>{nombre}</Title>
               <Favorito onClick={alternarFavorito} esFavorito={esFavorito} />
             </span>
-            <Body14>
-              #
-              {id}
-            </Body14>
+            <Body14>{`#${id}`}</Body14>
           </PokeCabecera>
           <PokeCuerpo>
             <PokeImagen src={imagen} />
@@ -122,7 +119,7 @@ PokeTarjeta.propTypes = {
   id: propTypes.string.isRequired,
   imagen: propTypes.string.isRequired,
   tipos: propTypes.arrayOf(propTypes.string).isRequired,
-  alternarFavorito: propTypes.arrayOf(propTypes.string).isRequired,
+  alternarFavorito: propTypes.func.isRequired,
   esFavorito: propTypes.bool.isRequired,
 };
 

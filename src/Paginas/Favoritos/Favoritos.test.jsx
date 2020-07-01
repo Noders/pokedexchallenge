@@ -10,7 +10,7 @@ afterEach(() => {
   ensureMocksReset();
 });
 
-const alternarFavoritos = () => {};
+const alternarFavorito = () => {};
 
 describe('Con 3 pokemones favoritos', () => {
   const favoritos = new Set([1, 2, 3]);
@@ -18,7 +18,7 @@ describe('Con 3 pokemones favoritos', () => {
     const renderResult = render(
       <Favoritos
         favoritos={favoritos}
-        alternarFavoritos={alternarFavoritos}
+        alternarFavorito={alternarFavorito}
       />,
     );
     const data = renderResult.getAllByTestId('poke-tarjeta');
@@ -32,7 +32,7 @@ describe('Sin pokemones favoritos', () => {
     const renderResult = render(
       <Favoritos
         favoritos={favoritos}
-        alternarFavoritos={alternarFavoritos}
+        alternarFavorito={alternarFavorito}
       />,
     );
     const data = renderResult.queryAllByTestId('poke-tarjeta');

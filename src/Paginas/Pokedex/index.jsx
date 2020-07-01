@@ -24,7 +24,6 @@ function Pokedex({ alternarFavorito, favoritos }) {
         const { name: nombre, id, type: tipos } = pokemon;
         const parsedId = id.toString().padStart(3, '0');
         const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
-
         return (
           <PokeTarjeta
             nombre={nombre.english}
@@ -55,7 +54,7 @@ function Pokedex({ alternarFavorito, favoritos }) {
 
 Pokedex.propTypes = {
   favoritos: PropTypes.instanceOf(Set).isRequired,
-  alternarFavorito: PropTypes.arrayOf(PropTypes.string).isRequired,
+  alternarFavorito: PropTypes.func.isRequired,
 };
 
 export default Pokedex;

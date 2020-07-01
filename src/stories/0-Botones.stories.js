@@ -1,7 +1,7 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { Boton } from '../Componentes/Boton';
 import { Tema } from '../Estilos';
-import { ThemeProvider } from 'styled-components';
 
 export default {
   title: 'Boton',
@@ -9,9 +9,9 @@ export default {
 };
 
 export const ToStorybook = () => (
-    <ThemeProvider theme={Tema}>
-        <Boton>Hola :)</Boton>
-    </ThemeProvider>
+  <ThemeProvider theme={Tema}>
+    <Boton>Hola :)</Boton>
+  </ThemeProvider>
 );
 
 ToStorybook.story = {
@@ -19,9 +19,9 @@ ToStorybook.story = {
 };
 
 export const Secundario = () => (
-    <ThemeProvider theme={Tema}>
-        <Boton tipo="secundario">Mundo!</Boton>
-    </ThemeProvider>
+  <ThemeProvider theme={Tema}>
+    <Boton tipo="secundario">Mundo!</Boton>
+  </ThemeProvider>
 );
 
 Secundario.story = {

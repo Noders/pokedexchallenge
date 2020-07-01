@@ -63,8 +63,8 @@ export const Router = ({
 };
 
 Router.propTypes = {
-  setAutenticado: PropTypes.instanceOf(Set).isRequired,
-  autenticado: PropTypes.isRequired,
+  setAutenticado: PropTypes.func.isRequired,
+  autenticado: PropTypes.bool.isRequired,
   favoritos: PropTypes.instanceOf(Set).isRequired,
   alternarFavoritos: PropTypes.func.isRequired,
 };

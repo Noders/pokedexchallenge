@@ -12,13 +12,13 @@ afterEach(() => {
 });
 
 test('Renderiza pokemones en Loading', async () => {
-  const renderResult = render(<Pokedex favoritos={new Set()} />);
+  const renderResult = render(<Pokedex alternarFavorito={() => {}} favoritos={new Set()} />);
   const data = await renderResult.findAllByText('Loading');
   expect(data.length).toBe(151);
 });
 
 test('Renderiza pokemones', async () => {
-  const { findAllByTestId } = render(<Pokedex favoritos={new Set()} />);
+  const { findAllByTestId } = render(<Pokedex alternarFavorito={() => {}} favoritos={new Set()} />);
   act(() => requestIdleCallback.runIdleCallbacks());
   const data = await findAllByTestId('poke-cabecera');
   expect(data.length).toBe(151);
@@ -26,7 +26,7 @@ test('Renderiza pokemones', async () => {
 
 test('Renderiza 3 pokemones favoritos', async () => {
   const { findAllByTestId } = render(
-    <Pokedex favoritos={new Set([1, 2, 3])} />,
+    <Pokedex alternarFavorito={() => {}} favoritos={new Set([1, 2, 3])} />,
   );
   act(() => requestIdleCallback.runIdleCallbacks());
   const data = await findAllByTestId('favorito-true');

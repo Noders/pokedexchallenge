@@ -2,32 +2,34 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-const primario = css(({theme}) => {
-    const {colores} = theme;
-    return {
-        color: colores.white,
-        backgroundColor: colores.purpleBaseline,
-        borderColor: colores.purpleBaseline,
-        '&:hover': {
-            backgroundColor: colores.purple200,
-            borderColor: colores.purple200,
-        },
-        '&:active': {
-            backgroundColor: colores.purple500,
-            borderColor: colores.purple500,
-        }
-    };
+const primario = css(({ theme }) => {
+  const { colores } = theme;
+  return {
+    color: colores.white,
+    padding: 30,
+    backgroundColor: colores.purpleBaseline,
+    borderColor: colores.purpleBaseline,
+    '&:hover': {
+      backgroundColor: colores.purple200,
+      borderColor: colores.purple200,
+    },
+    '&:active': {
+      backgroundColor: colores.purple500,
+      borderColor: colores.purple500,
+    },
+  };
 });
 
-const secundario = css(({theme}) => {
-    const {colores} = theme;
-    return {
-        color: colores.purpleBaseline,
-        backgroundColor: colores.white,
-        borderColor: colores.purpleBaseline,
-    };
+const secundario = css(({ theme }) => {
+  const { colores } = theme;
+  return {
+    padding: 60,
+    color: colores.purpleBaseline,
+    backgroundColor: colores.white,
+    borderColor: colores.purpleBaseline,
+  };
 });
-  
+
 const baseButtonStyle = css`
   display: flex;
   flex-direction: column;
@@ -63,7 +65,11 @@ export const Boton = ({ onClick, tipo, children }) => (
 );
 
 Boton.propTypes = {
-  tipo: PropTypes.oneOf(['primario', 'secundario']).isRequired,
-  children: PropTypes.element.isRequired,
+  tipo: PropTypes.oneOf(['primario', 'secundario']),
+  children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
+};
+
+Boton.defaultProps = {
+  tipo: 'primario',
 };
