@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { Boton } from '../../Componentes/Boton';
-import Input from '../../Componentes/Input';
-import Panel from '../../Componentes/Panel';
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
+import { Boton } from "../../Componentes/Boton";
+import Input from "../../Componentes/Input";
+import Panel from "../../Componentes/Panel";
 
 const UserFalso = {
-  username: 'LCJURY',
-  password: '44554',
+  username: "LCJURY",
+  password: "44554",
 };
 
 const Pagina = styled.main`
@@ -46,8 +46,8 @@ const TituloFancy = styled.h1`
 `;
 
 function Login({ enLoginExitoso }) {
-  const [userName, setUserName] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [userName, setUserName] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const onUsernameChange = (evento) => {
     setUserName(evento.target.value);
   };
@@ -65,20 +65,28 @@ function Login({ enLoginExitoso }) {
       <PanelWrapper>
         <Panel>
           <TituloFancy>
-            30 Dias
-            {' '}
-            <br />
+            30 Dias <br />
             de React
           </TituloFancy>
           <InputWrapper>
-            <Input onChange={onUsernameChange} label="Username" name="username" />
+            <Input
+              onChange={onUsernameChange}
+              label="Username"
+              name="username"
+            />
           </InputWrapper>
           <InputWrapper>
-            <Input onChange={onPasswordChange} label="Password" name="password" />
+            <Input
+              onChange={onPasswordChange}
+              label="Password"
+              name="password"
+            />
           </InputWrapper>
           <ButtonWrapper>
             <Boton onClick={intentarLoginAsincrono}>Ingresar</Boton>
-            <Boton onClick={() => {}} tipo="secundario">?????</Boton>
+            <Boton onClick={() => {}} tipo="secundario">
+              ?????
+            </Boton>
           </ButtonWrapper>
         </Panel>
       </PanelWrapper>

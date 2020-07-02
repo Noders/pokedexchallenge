@@ -1,11 +1,9 @@
-import React from 'react';
-import {
-  Switch, Route, Redirect, useHistory,
-} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import Pokedex from '../../Paginas/Pokedex';
-import Login from '../../Paginas/Login';
-import Favoritos from '../../Paginas/Favoritos';
+import React from "react";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
+import Pokedex from "../../Paginas/Pokedex";
+import Login from "../../Paginas/Login";
+import Favoritos from "../../Paginas/Favoritos";
 
 const AuthenticatedRouter = ({ favoritos, alternarFavoritos, autenticado }) => {
   if (!autenticado) {
@@ -45,8 +43,8 @@ export const Router = ({
         <Login
           enLoginExitoso={() => {
             setAutenticado(true);
-            window.localStorage.setItem('autenticado', true);
-            history.push('/pokedex');
+            window.localStorage.setItem("autenticado", true);
+            history.push("/pokedex");
           }}
         />
       </Route>

@@ -1,10 +1,10 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { Boton } from '../Componentes/Boton';
-import { Tema } from '../Estilos';
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import { Boton } from ".";
+import { Tema } from "../../Estilos";
 
 export default {
-  title: 'Boton',
+  title: "Boton",
   component: Boton,
 };
 
@@ -15,7 +15,7 @@ export const ToStorybook = () => (
 );
 
 ToStorybook.story = {
-  name: 'Boton primario',
+  name: "Boton primario",
 };
 
 export const Secundario = () => (
@@ -25,5 +25,5 @@ export const Secundario = () => (
 );
 
 Secundario.story = {
-  name: 'Boton secundario',
+  name: "Boton secundario",
 };

@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import propTypes from 'prop-types';
-import Tipo, { pokeTipos } from '../Tipo';
-import { Title, Body14 } from '../Tipografia';
-import { Favorito } from '../Favorito';
+import React from "react";
+import styled from "styled-components";
+import propTypes from "prop-types";
+import Tipo, { pokeTipos } from "../Tipo";
+import { Title, Body14 } from "../Tipografia";
+import { Favorito } from "../Favorito";
 
 const mapaDeTipos = {
   Fire: pokeTipos.fuego,
@@ -58,7 +58,7 @@ const ContenedorDeTipos = styled.div`
   justify-content: flex-end;
 `;
 
-const isServerSideRendering = typeof window === 'undefined';
+const isServerSideRendering = typeof window === "undefined";
 const useDeferedRendering = () => {
   const [render, setRender] = React.useState(isServerSideRendering);
   React.useEffect(() => {
@@ -87,7 +87,7 @@ export function PokeTarjeta({
   return (
     <PoketarjetaWrapper data-testid="poke-tarjeta">
       {render ? (
-        <>
+        <React.Fragment>
           <PokeCabecera data-testid="poke-cabecera">
             <span>
               <Title>{nombre}</Title>
@@ -100,14 +100,10 @@ export function PokeTarjeta({
           </PokeCuerpo>
           <ContenedorDeTipos>
             {tipos.map((tipo) => (
-              <Tipo
-                key={tipo}
-                tipo={mapaDeTipos[tipo]}
-                tipo-original={tipo}
-              />
+              <Tipo key={tipo} tipo={mapaDeTipos[tipo]} tipo-original={tipo} />
             ))}
           </ContenedorDeTipos>
-        </>
+        </React.Fragment>
       ) : (
         <div>Loading</div>
       )}

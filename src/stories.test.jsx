@@ -1,6 +1,6 @@
-import initStoryshots from '@storybook/addon-storyshots';
-import { cleanup, render } from '@testing-library/react';
-import { createSerializer } from 'jest-emotion';
+import initStoryshots from "@storybook/addon-storyshots";
+import { cleanup, render } from "@testing-library/react";
+import { createSerializer } from "jest-emotion";
 
 initStoryshots({
   asyncJest: true,

@@ -1,1 +1,1 @@
-export { Estrella } from './estrella';
+export { Estrella } from "./estrella";

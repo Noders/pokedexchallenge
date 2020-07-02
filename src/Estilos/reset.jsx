@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalReset = createGlobalStyle`
 /* normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

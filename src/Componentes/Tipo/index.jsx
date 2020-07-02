@@ -1,26 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled, { css } from "styled-components";
 
 export const pokeTipos = {
-  fuego: 'fuego',
-  volador: 'volador',
-  electrico: 'electrico',
-  luchador: 'luchador',
-  veneno: 'veneno',
-  normal: 'normal',
-  tierra: 'tierra',
-  roca: 'roca',
-  insecto: 'insecto',
-  fantasma: 'fantasma',
-  agua: 'agua',
-  planta: 'planta',
-  metal: 'metal',
-  hielo: 'hielo',
-  psiquico: 'psiquico',
-  dragon: 'dragon',
-  oscuridad: 'oscuridad',
-  hada: 'hada',
+  fuego: "fuego",
+  volador: "volador",
+  electrico: "electrico",
+  luchador: "luchador",
+  veneno: "veneno",
+  normal: "normal",
+  tierra: "tierra",
+  roca: "roca",
+  insecto: "insecto",
+  fantasma: "fantasma",
+  agua: "agua",
+  planta: "planta",
+  metal: "metal",
+  hielo: "hielo",
+  psiquico: "psiquico",
+  dragon: "dragon",
+  oscuridad: "oscuridad",
+  hada: "hada",
 };
 
 const fuego = css`

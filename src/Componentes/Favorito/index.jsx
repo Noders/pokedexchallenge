@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { Estrella } from '../Svgs';
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
+import { Estrella } from "../Svgs";
 
 const Wrapper = styled.span`
-  color: ${({ esFavorito }) => (esFavorito ? 'gold' : 'white')};
+  color: ${({ esFavorito }) => (esFavorito ? "gold" : "white")};
   transition: color 150ms ease-in-out, opacity 150ms ease-in-out;
   cursor: pointer;
   &:hover {
