@@ -13,6 +13,12 @@ const CardsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+const InputWrapper = styled.div`
+  width: 320px;
+  margin: 24px auto;
+  max-width: 100%;
+`;
+
 const pokemonesFiltrados = pokemons.slice(0, 151);
 
 function Pokedex({ alternarFavorito, favoritos }) {
@@ -42,12 +48,14 @@ function Pokedex({ alternarFavorito, favoritos }) {
 
   return (
     <React.Fragment>
-      <Input
-        name="Filter"
-        onChange={(evento) => {
-          setFilter(evento.target.value);
-        }}
-      />
+      <InputWrapper>
+        <Input
+          name="Filter"
+          onChange={(evento) => {
+            setFilter(evento.target.value);
+          }}
+        />
+      </InputWrapper>
       <CardsWrapper>{pokeTarjetasFiltradas}</CardsWrapper>
     </React.Fragment>
   );
