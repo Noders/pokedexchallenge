@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import Pokedex from "../../Paginas/Pokedex";
+import Pokemon from "../../Paginas/Pokemon";
 import Login from "../../Paginas/Login";
 import Favoritos from "../../Paginas/Favoritos";
 
@@ -11,6 +12,9 @@ const AuthenticatedRouter = ({ favoritos, alternarFavoritos, autenticado }) => {
   }
   return (
     <Switch>
+      <Route path="/pokedex/:nombrePokemon">
+        <Pokemon />
+      </Route>
       <Route path="/pokedex">
         <Pokedex favoritos={favoritos} alternarFavorito={alternarFavoritos} />
       </Route>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import propTypes from "prop-types";
+import { Link } from "react-router-dom";
 import Tipo, { pokeTipos } from "../Tipo";
 import { Title, Body14 } from "../Tipografia";
 import { Favorito } from "../Favorito";
@@ -58,6 +59,11 @@ const ContenedorDeTipos = styled.div`
   justify-content: flex-end;
 `;
 
+const StyledLink = styled(Link)`
+  ${({ theme }) => theme.tipografias["32m"]}
+  text-decoration: none;
+`;
+
 const isServerSideRendering = typeof window === "undefined";
 const useDeferedRendering = () => {
   const [render, setRender] = React.useState(isServerSideRendering);
@@ -83,20 +89,21 @@ export function PokeTarjeta({
   esFavorito,
 }) {
   const render = useDeferedRendering(true);
-
   return (
     <PoketarjetaWrapper data-testid="poke-tarjeta">
       {render ? (
         <React.Fragment>
           <PokeCabecera data-testid="poke-cabecera">
             <span>
-              <Title>{nombre}</Title>
+              <StyledLink to={`/pokedex/${nombre}`}>{nombre}</StyledLink>
               <Favorito onClick={alternarFavorito} esFavorito={esFavorito} />
             </span>
             <Body14>{`#${id}`}</Body14>
           </PokeCabecera>
           <PokeCuerpo>
-            <PokeImagen src={imagen} />
+            <Link to={`/pokedex/${nombre}`}>
+              <PokeImagen src={imagen} />
+            </Link>
           </PokeCuerpo>
           <ContenedorDeTipos>
             {tipos.map((tipo) => (
