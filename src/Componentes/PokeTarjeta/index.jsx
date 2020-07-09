@@ -3,7 +3,7 @@ import styled from "styled-components";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Tipo, { pokeTipos } from "../Tipo";
-import { Title, Body14 } from "../Tipografia";
+import { Body14 } from "../Tipografia";
 import { Favorito } from "../Favorito";
 
 const mapaDeTipos = {

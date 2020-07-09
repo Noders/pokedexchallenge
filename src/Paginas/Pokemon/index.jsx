@@ -1,45 +1,55 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
+import { Loading } from "../../Componentes/Loading";
+import { usePokemonFetch } from "./hooks";
+import { pokemonPageProps } from "./types";
 
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-const PokemonPage = () => {
-  const { nombrePokemon } = useParams();
-  const [pokemon, setPokemon] = React.useState();
-  const hora = { asda: "123" };
-  const loqvoyalogear = hora.asda;
-  React.useEffect(() => {
-    // Guardar esto en el estado del componente
-    fetch(`https://pokeapi.co/api/v2/pokemon/${nombrePokemon.toLowerCase()}`)
-      .then((data) => data.json())
-      .then((apiResponse) => {
-        setPokemon({
-          tipos: apiResponse.types.map(({ type }) => capitalize(type.name)),
-          nombre: apiResponse.name,
-          id: apiResponse.id,
-          imagen: apiResponse.sprites.front_default,
-        });
-      });
-  }, [nombrePokemon, loqvoyalogear]);
-
-  // hora = 123;
-  hora.asda = 123;
-
-  if (!pokemon) {
+export const PokemonPageInterna = ({
+  nombre,
+  id,
+  imagen,
+  tipos,
+  esFavorito,
+  alternarFavorito,
+  loading,
+  error,
+}) => {
+  if (loading) {
     // TODO: Agregar loading de verdad
-    return <div>...loading</div>;
+    return <Loading />;
+  }
+  if (error) {
+    // TODO: Agregar ERROR de verdad
+    return <div>...ERROR!!!</div>;
   }
   return (
     <PokeTarjeta
-      nombre={pokemon.nombre}
-      id={pokemon.id.toString().padStart(3, "0")}
-      imagen={pokemon.imagen}
-      tipos={pokemon.tipos}
+      nombre={nombre}
+      id={id}
+      imagen={imagen}
+      tipos={tipos}
+      esFavorito={esFavorito}
+      alternarFavorito={alternarFavorito}
+    />
+  );
+};
+
+PokemonPageInterna.propTypes = pokemonPageProps;
+
+const PokemonPage = () => {
+  const { nombrePokemon } = useParams();
+  const { data, loading, error } = usePokemonFetch(nombrePokemon);
+  return (
+    <PokemonPageInterna
+      nombre={data.nombre}
+      id={data.id.toString().padStart(3, "0")}
+      imagen={data.imagen}
+      tipos={data.tipos}
       esFavorito={false}
       alternarFavorito={() => {}}
+      loading={loading}
+      error={error}
     />
   );
 };
