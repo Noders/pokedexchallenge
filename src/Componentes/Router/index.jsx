@@ -5,6 +5,9 @@ import Pokedex from "../../Paginas/Pokedex";
 import Pokemon from "../../Paginas/Pokemon";
 import Login from "../../Paginas/Login";
 import Favoritos from "../../Paginas/Favoritos";
+import { PokeRuta } from "../PokeRuta";
+
+const Error404 = () => <h1>Un gatito acaba de morir</h1>;
 
 const AuthenticatedRouter = ({ favoritos, alternarFavoritos, autenticado }) => {
   if (!autenticado) {
@@ -12,18 +15,25 @@ const AuthenticatedRouter = ({ favoritos, alternarFavoritos, autenticado }) => {
   }
   return (
     <Switch>
-      <Route path="/pokedex/:nombrePokemon">
-        <Pokemon />
-      </Route>
-      <Route path="/pokedex">
-        <Pokedex favoritos={favoritos} alternarFavorito={alternarFavoritos} />
-      </Route>
-      <Route path="/favoritos">
-        <Favoritos favoritos={favoritos} alternarFavorito={alternarFavoritos} />
-      </Route>
-      <Route path="/">
-        <h1>Un gatito acaba de morir</h1>
-      </Route>
+      <PokeRuta path="/pokedex/:nombrePokemon" Componente={Pokemon} />
+      <PokeRuta
+        path="/pokedex"
+        Componente={Pokedex}
+        favoritos={favoritos}
+        alternarFavorito={alternarFavoritos}
+      />
+      <PokeRuta
+        path="/favoritos"
+        Componente={Favoritos}
+        favoritos={favoritos}
+        alternarFavorito={alternarFavoritos}
+      />
+      <PokeRuta
+        path="/"
+        Componente={Error404}
+        favoritos={favoritos}
+        alternarFavorito={alternarFavoritos}
+      />
     </Switch>
   );
 };

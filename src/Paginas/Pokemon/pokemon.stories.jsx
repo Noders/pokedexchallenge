@@ -1,6 +1,5 @@
 import React from "react";
 import { PokemonPageInterna } from "./index";
-import { routerDecorator } from "../../../.storybook/decorators";
 import missingno from "../../Componentes/PokeTarjeta/missingno.jpg";
 
 const pokemonPageProps = {
@@ -17,11 +16,12 @@ const pokemonPageProps = {
 export default {
   title: "PokemonPage",
   component: PokemonPageInterna,
-  decorators: [routerDecorator],
 };
 
-// eslint-disable-next-line react/jsx-props-no-spreading
-export const Default = () => <PokemonPageInterna {...pokemonPageProps} />;
+export const Default = () => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <PokemonPageInterna {...pokemonPageProps} />
+);
 
 export const Loading = () => (
   // eslint-disable-next-line react/jsx-props-no-spreading

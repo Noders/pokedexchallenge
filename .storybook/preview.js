@@ -1,5 +1,5 @@
 import { addDecorator, addParameters } from "@storybook/react";
-import { themeDecorator, globalDecorators } from "./decorators";
+import { themeDecorator, globalDecorators, routerDecorator } from "./decorators";
 
 const viewports = {
   kindleFire2: {
@@ -17,6 +17,7 @@ const viewports = {
 };
 addDecorator(globalDecorators);
 addDecorator(themeDecorator);
+addDecorator(routerDecorator);
 addParameters({
   viewport: {
     viewports: viewports,
