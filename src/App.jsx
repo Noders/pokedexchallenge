@@ -9,20 +9,8 @@ import {
   GlobalAppStyles,
   Tema,
 } from "./Estilos";
-import { useLocalStorage } from "./Hooks";
 
 function App() {
-  const [favoritos, setFavoritos] = useLocalStorage("favoritos", []);
-  const [autenticado, setAutenticado] = useLocalStorage("autenticado", false);
-  const nuestroSetDeFavoritos = new Set(favoritos);
-  const alternarFavoritos = (idFavorito) => {
-    if (nuestroSetDeFavoritos.has(idFavorito)) {
-      nuestroSetDeFavoritos.delete(idFavorito);
-    } else {
-      nuestroSetDeFavoritos.add(idFavorito);
-    }
-    setFavoritos(Array.from(nuestroSetDeFavoritos));
-  };
   return (
     <ThemeProvider theme={Tema}>
       <GlobalAppStyles />
@@ -30,12 +18,7 @@ function App() {
       <GlobalFontStyles />
       <BrowserRouter>
         <Navigation />
-        <Router
-          favoritos={nuestroSetDeFavoritos}
-          autenticado={autenticado}
-          setAutenticado={setAutenticado}
-          alternarFavoritos={alternarFavoritos}
-        />
+        <Router />
       </BrowserRouter>
     </ThemeProvider>
   );

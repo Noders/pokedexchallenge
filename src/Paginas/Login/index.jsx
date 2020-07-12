@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Boton } from "../../Componentes/Boton";
 import Input from "../../Componentes/Input";
 import Panel from "../../Componentes/Panel";
+import { config } from "../../config";
 
 const UserFalso = {
   username: "LCJURY",
@@ -55,9 +56,22 @@ function Login({ enLoginExitoso }) {
     setPassword(evento.target.value);
   };
   const intentarLoginAsincrono = () => {
-    if (userName === UserFalso.username && password === UserFalso.password) {
-      enLoginExitoso();
-    }
+    // 👊 a la api
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    fetch(`${config.authenticationApiEndpoint}/login`, {
+      body: JSON.stringify({
+        email: userName,
+        password,
+      }),
+      headers: myHeaders,
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then(({ token }) => {
+        enLoginExitoso(token);
+      });
   };
 
   return (
@@ -65,7 +79,8 @@ function Login({ enLoginExitoso }) {
       <PanelWrapper>
         <Panel>
           <TituloFancy>
-            30 Dias <br />
+            30 Dias
+            <br />
             de React
           </TituloFancy>
           <InputWrapper>

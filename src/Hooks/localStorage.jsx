@@ -9,9 +9,13 @@ export const useLocalStorage = (key, defaultValue) => {
     }
     return JSON.parse(localStoredValue);
   });
-  const setItem = (value) => {
-    setState(value);
-    window.localStorage.setItem(key, JSON.stringify(value));
-  };
+  const setItem = React.useCallback(
+    (value) => {
+      const actualValue = value ?? defaultValue;
+      setState(actualValue);
+      window.localStorage.setItem(key, JSON.stringify(actualValue));
+    },
+    [defaultValue, key]
+  );
   return [state, setItem];
 };
