@@ -12,7 +12,6 @@ const CardsWrapper = styled.div`
 `;
 
 function Favoritos({ favoritos, alternarFavorito }) {
-  console.log({ favoritos });
   return (
     <CardsWrapper>
       {favoritos.size === 0

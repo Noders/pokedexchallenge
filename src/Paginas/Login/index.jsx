@@ -4,12 +4,7 @@ import PropTypes from "prop-types";
 import { Boton } from "../../Componentes/Boton";
 import Input from "../../Componentes/Input";
 import Panel from "../../Componentes/Panel";
-import { config } from "../../config";
-
-const UserFalso = {
-  username: "LCJURY",
-  password: "44554",
-};
+import { pokeAuth } from "../../Servicios";
 
 const Pagina = styled.main`
   height: 100%;
@@ -47,31 +42,18 @@ const TituloFancy = styled.h1`
 `;
 
 function Login({ enLoginExitoso }) {
-  const [userName, setUserName] = React.useState("");
+  const [usuario, setUsuario] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const onUsernameChange = (evento) => {
-    setUserName(evento.target.value);
-  };
-  const onPasswordChange = (evento) => {
-    setPassword(evento.target.value);
-  };
-  const intentarLoginAsincrono = () => {
-    // 👊 a la api
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    fetch(`${config.authenticationApiEndpoint}/login`, {
-      body: JSON.stringify({
-        email: userName,
+  const intentarLoginAsincrono = async () => {
+    try {
+      await pokeAuth.login({
+        usuario,
         password,
-      }),
-      headers: myHeaders,
-      method: "POST",
-    })
-      .then((response) => response.json())
-      .then(({ token }) => {
-        enLoginExitoso(token);
       });
+      enLoginExitoso();
+    } catch (e) {
+      // TODO: (felipe) hacer algo en el error
+    }
   };
 
   return (
@@ -85,14 +67,18 @@ function Login({ enLoginExitoso }) {
           </TituloFancy>
           <InputWrapper>
             <Input
-              onChange={onUsernameChange}
+              onChange={(evento) => {
+                setUsuario(evento.target.value);
+              }}
               label="Username"
               name="username"
             />
           </InputWrapper>
           <InputWrapper>
             <Input
-              onChange={onPasswordChange}
+              onChange={(evento) => {
+                setPassword(evento.target.value);
+              }}
               label="Password"
               name="password"
             />
