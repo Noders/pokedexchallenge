@@ -25,6 +25,7 @@
     "lint:fix": "npm run lint --fix",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
+    "now-build": "yarn lint && yarn build",
     "chromatic": "npx chromatic --project-token=kq4syj0xiuq"
   },
   "eslintConfig": {

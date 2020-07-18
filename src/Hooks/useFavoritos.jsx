@@ -5,14 +5,18 @@ import { pokeAuth } from "../Servicios";
 const dummyArray = [];
 export const useFavoritos = () => {
   const [favoritos, setFavoritos] = useLocalStorage("favoritos", dummyArray);
-  const [token] = useLocalStorage("token", "");
+  // const [token] = useLocalStorage("token", "");
+  const token = "";
   const nuestroSetDeFavoritos = React.useMemo(() => {
     return new Set(favoritos);
   }, [favoritos]);
 
-  React.useEffect(async () => {
-    const { favorites } = await pokeAuth.obtenerFavoritos();
-    setFavoritos(favorites);
+  React.useEffect(() => {
+    const onMount = async () => {
+      const { favorites } = await pokeAuth.obtenerFavoritos();
+      setFavoritos(favorites);
+    };
+    onMount();
   }, [setFavoritos]);
 
   const alternarFavoritos = React.useCallback(
