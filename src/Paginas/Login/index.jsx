@@ -37,11 +37,11 @@ const TituloFancy = styled.h1`
   left: 50%;
   transform: rotate(-9deg) translateX(-50%);
   background: -webkit-linear-gradient(40deg, #7660de, #93e16f);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   pointer-events: none;
 `;
-
 function Login({ token, enLoginExitoso }) {
   const [usuario, setUsuario] = React.useState("");
   const [password, setPassword] = React.useState("");

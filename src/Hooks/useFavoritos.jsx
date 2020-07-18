@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocalStorage } from ".";
+import { useLocalStorage } from "./localStorage";
 import { pokeAuth } from "../Servicios";
 
 const dummyArray = [];

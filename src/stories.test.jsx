@@ -6,6 +6,7 @@ initStoryshots({
   asyncJest: true,
   snapshotSerializers: [createSerializer()],
   test: ({ story, context, done }) => {
+    // eslint-disable-next-line no-console
     console.info(`Rendering story: ${context.kind} - ${story.name}`);
     render(story.render());
     setTimeout(() => {
