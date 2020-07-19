@@ -17,7 +17,7 @@ export const useFavoritos = () => {
     onMount();
   }, [setFavoritos]);
 
-  const alternarFavoritos = React.useCallback(
+  const alternarFavorito = React.useCallback(
     async (idFavorito) => {
       const localFavoritos = new Set(nuestroSetDeFavoritos);
       let response;
@@ -37,6 +37,6 @@ export const useFavoritos = () => {
 
   return {
     favoritos: nuestroSetDeFavoritos,
-    alternarFavoritos,
+    alternarFavorito,
   };
 };

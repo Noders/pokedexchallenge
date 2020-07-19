@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { Loading } from "../../Componentes/Loading";
 import { pokemonPageProps } from "./types";
@@ -37,8 +37,9 @@ export const PokemonPageInterna = ({
 
 PokemonPageInterna.propTypes = pokemonPageProps;
 
-const PokemonPage = ({ params }) => {
-  const { data, loading, error } = usePokemonFetch(params.nombrePokemon);
+const PokemonPage = () => {
+  const { nombrePokemon } = useParams();
+  const { data, loading, error } = usePokemonFetch(nombrePokemon);
   if (loading) {
     // TODO: Agregar loading de verdad
     return <Loading />;
@@ -59,12 +60,6 @@ const PokemonPage = ({ params }) => {
       error={error}
     />
   );
-};
-
-PokemonPage.propTypes = {
-  params: PropTypes.shape({
-    nombrePokemon: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default PokemonPage;
