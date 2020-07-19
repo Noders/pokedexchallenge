@@ -45,16 +45,16 @@ AuthenticatedRouter.propTypes = {
 };
 
 export const Router = () => {
-  const [autenticado, setAutenticado] = useLocalStorage("autenticado", false);
-  const [, setToken] = useLocalStorage("token", "");
+  const [token, setToken] = useLocalStorage("token", "");
   const history = useHistory();
+
   return (
     <Switch>
       <Route path="/login" exact>
         <Login
-          enLoginExitoso={(token) => {
-            setAutenticado(true);
-            setToken(token);
+          token={token}
+          enLoginExitoso={(previousToken) => {
+            setToken(previousToken);
             history.push("/pokedex");
           }}
         />
@@ -62,7 +62,7 @@ export const Router = () => {
       <Route path="/tyc" exact>
         <h1>TYC</h1>
       </Route>
-      <AuthenticatedRouter autenticado={autenticado} />
+      <AuthenticatedRouter autenticado={Boolean(token)} />
     </Switch>
   );
 };

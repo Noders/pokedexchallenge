@@ -10,7 +10,7 @@ export default {
 
 export const ToStorybook = () => (
   <ThemeProvider theme={Tema}>
-    <Boton>Hola :)</Boton>
+    <Boton onClick={() => {}}>Hola :)</Boton>
   </ThemeProvider>
 );
 
@@ -20,7 +20,9 @@ ToStorybook.story = {
 
 export const Secundario = () => (
   <ThemeProvider theme={Tema}>
-    <Boton tipo="secundario">Mundo!</Boton>
+    <Boton onClick={() => {}} tipo="secundario">
+      Mundo!
+    </Boton>
   </ThemeProvider>
 );
 

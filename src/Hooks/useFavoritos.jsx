@@ -1,18 +1,20 @@
 import React from "react";
-import { useLocalStorage } from ".";
+import { useLocalStorage } from "./localStorage";
 import { pokeAuth } from "../Servicios";
 
 const dummyArray = [];
 export const useFavoritos = () => {
   const [favoritos, setFavoritos] = useLocalStorage("favoritos", dummyArray);
-  const [token] = useLocalStorage("token", "");
   const nuestroSetDeFavoritos = React.useMemo(() => {
     return new Set(favoritos);
   }, [favoritos]);
 
-  React.useEffect(async () => {
-    const { favorites } = await pokeAuth.obtenerFavoritos();
-    setFavoritos(favorites);
+  React.useEffect(() => {
+    const onMount = async () => {
+      const { favorites } = await pokeAuth.obtenerFavoritos();
+      setFavoritos(favorites);
+    };
+    onMount();
   }, [setFavoritos]);
 
   const alternarFavoritos = React.useCallback(
@@ -30,7 +32,7 @@ export const useFavoritos = () => {
       const { newFavorites } = await response;
       setFavoritos(newFavorites);
     },
-    [nuestroSetDeFavoritos, setFavoritos, token]
+    [nuestroSetDeFavoritos, setFavoritos]
   );
 
   return {

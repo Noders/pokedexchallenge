@@ -23,6 +23,7 @@ export const usePokemonFetch = (nombrePokemon) => {
         });
         setError(false);
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.error(e);
         setError(true);
       } finally {

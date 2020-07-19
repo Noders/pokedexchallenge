@@ -11,13 +11,15 @@ export default {
   decorators: [themeDecorator, globalDecorators],
 };
 
-export const TextInput = () => <Input />;
+export const TextInput = () => <Input onChange={() => {}} name="" />;
 
 TextInput.story = {
-  name: "Texte",
+  name: "Text",
 };
 
-export const PasswordInput = () => <Input type="password" />;
+export const PasswordInput = () => (
+  <Input onChange={() => {}} name="" type="password" />
+);
 
 PasswordInput.story = {
   name: "Password",

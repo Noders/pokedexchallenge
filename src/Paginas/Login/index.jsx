@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Boton } from "../../Componentes/Boton";
@@ -36,25 +37,30 @@ const TituloFancy = styled.h1`
   left: 50%;
   transform: rotate(-9deg) translateX(-50%);
   background: -webkit-linear-gradient(40deg, #7660de, #93e16f);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   pointer-events: none;
 `;
-
-function Login({ enLoginExitoso }) {
+function Login({ token, enLoginExitoso }) {
   const [usuario, setUsuario] = React.useState("");
   const [password, setPassword] = React.useState("");
+
   const intentarLoginAsincrono = async () => {
     try {
-      await pokeAuth.login({
+      const { token: responseToken } = await pokeAuth.login({
         usuario,
         password,
       });
-      enLoginExitoso();
+      enLoginExitoso(responseToken);
     } catch (e) {
       // TODO: (felipe) hacer algo en el error
     }
   };
+
+  if (token) {
+    return <Redirect to="/pokedex" />;
+  }
 
   return (
     <Pagina>
@@ -97,6 +103,7 @@ function Login({ enLoginExitoso }) {
 
 Login.propTypes = {
   enLoginExitoso: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export default Login;
