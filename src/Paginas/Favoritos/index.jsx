@@ -16,22 +16,24 @@ function Favoritos({ favoritos, alternarFavorito }) {
     <CardsWrapper>
       {favoritos.size === 0
         ? "No haz marcado ningún pokémon como favorito."
-        : Array.from(favoritos).map((idFavorito) => {
-            const pokemon = getPokemonById(idFavorito);
-            const parsedId = pokemon.id.toString().padStart(3, "0");
-            const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
-            return (
-              <PokeTarjeta
-                nombre={pokemon.name.english}
-                key={idFavorito}
-                id={parsedId}
-                imagen={url}
-                tipos={pokemon.type}
-                esFavorito={favoritos.has(idFavorito)}
-                alternarFavorito={() => alternarFavorito(idFavorito)}
-              />
-            );
-          })}
+        : Array.from(favoritos)
+            .filter((idFavorito) => getPokemonById(idFavorito))
+            .map((idFavorito) => {
+              const { id, name, type } = getPokemonById(idFavorito);
+              const parsedId = id.toString().padStart(3, "0");
+              const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
+              return (
+                <PokeTarjeta
+                  nombre={name.english}
+                  key={idFavorito}
+                  id={parsedId}
+                  imagen={url}
+                  tipos={type}
+                  esFavorito={favoritos.has(idFavorito)}
+                  alternarFavorito={() => alternarFavorito(idFavorito)}
+                />
+              );
+            })}
     </CardsWrapper>
   );
 }

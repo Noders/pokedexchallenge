@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -5,37 +6,33 @@ import Pokedex from "../../Paginas/Pokedex";
 import Pokemon from "../../Paginas/Pokemon";
 import Login from "../../Paginas/Login";
 import Favoritos from "../../Paginas/Favoritos";
-import { PokeRuta } from "../PokeRuta";
 import { useLocalStorage, useFavoritos } from "../../Hooks";
 
 const Error404 = () => <h1>Un gatito acaba de morir</h1>;
 
 const AuthenticatedRouter = ({ autenticado }) => {
-  const { favoritos, alternarFavoritos } = useFavoritos();
+  const { favoritos, alternarFavorito } = useFavoritos();
   if (!autenticado) {
     return <Redirect to="/login" />;
   }
+  const routeProps = {
+    favoritos,
+    alternarFavorito,
+  };
   return (
     <Switch>
-      <PokeRuta path="/pokedex/:nombrePokemon" Componente={Pokemon} />
-      <PokeRuta
-        path="/pokedex"
-        Componente={Pokedex}
-        favoritos={favoritos}
-        alternarFavorito={alternarFavoritos}
-      />
-      <PokeRuta
-        path="/favoritos"
-        Componente={Favoritos}
-        favoritos={favoritos}
-        alternarFavorito={alternarFavoritos}
-      />
-      <PokeRuta
-        path="/"
-        Componente={Error404}
-        favoritos={favoritos}
-        alternarFavorito={alternarFavoritos}
-      />
+      <Route path="/pokedex/:nombrePokemon">
+        <Pokemon {...routeProps} />
+      </Route>
+      <Route path="/pokedex">
+        <Pokedex {...routeProps} />
+      </Route>
+      <Route path="/favoritos">
+        <Favoritos {...routeProps} />
+      </Route>
+      <Route path="/">
+        <Error404 {...routeProps} />
+      </Route>
     </Switch>
   );
 };
