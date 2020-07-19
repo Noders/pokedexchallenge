@@ -5,8 +5,6 @@ import { pokeAuth } from "../Servicios";
 const dummyArray = [];
 export const useFavoritos = () => {
   const [favoritos, setFavoritos] = useLocalStorage("favoritos", dummyArray);
-  // const [token] = useLocalStorage("token", "");
-  const token = "";
   const nuestroSetDeFavoritos = React.useMemo(() => {
     return new Set(favoritos);
   }, [favoritos]);
@@ -34,7 +32,7 @@ export const useFavoritos = () => {
       const { newFavorites } = await response;
       setFavoritos(newFavorites);
     },
-    [nuestroSetDeFavoritos, setFavoritos, token]
+    [nuestroSetDeFavoritos, setFavoritos]
   );
 
   return {
