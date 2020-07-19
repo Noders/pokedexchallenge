@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { Loading } from "../../Componentes/Loading";
@@ -61,12 +60,6 @@ const PokemonPage = () => {
       error={error}
     />
   );
-};
-
-PokemonPage.propTypes = {
-  params: PropTypes.shape({
-    nombrePokemon: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default PokemonPage;

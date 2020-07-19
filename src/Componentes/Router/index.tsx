@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
-import PropTypes from "prop-types";
 import Pokedex from "../../Paginas/Pokedex";
 import Pokemon from "../../Paginas/Pokemon";
 import Login from "../../Paginas/Login";
@@ -10,7 +9,8 @@ import { useLocalStorage, useFavoritos } from "../../Hooks";
 
 const Error404 = () => <h1>Un gatito acaba de morir</h1>;
 
-const AuthenticatedRouter = ({ autenticado }) => {
+type AuthenticatedRouterProps = { autenticado: boolean };
+const AuthenticatedRouter = ({ autenticado }: AuthenticatedRouterProps) => {
   const { favoritos, alternarFavorito } = useFavoritos();
   if (!autenticado) {
     return <Redirect to="/login" />;
@@ -22,7 +22,7 @@ const AuthenticatedRouter = ({ autenticado }) => {
   return (
     <Switch>
       <Route path="/pokedex/:nombrePokemon">
-        <Pokemon {...routeProps} />
+        <Pokemon />
       </Route>
       <Route path="/pokedex">
         <Pokedex {...routeProps} />
@@ -31,14 +31,10 @@ const AuthenticatedRouter = ({ autenticado }) => {
         <Favoritos {...routeProps} />
       </Route>
       <Route path="/">
-        <Error404 {...routeProps} />
+        <Error404 />
       </Route>
     </Switch>
   );
-};
-
-AuthenticatedRouter.propTypes = {
-  autenticado: PropTypes.bool.isRequired,
 };
 
 export const Router = () => {
