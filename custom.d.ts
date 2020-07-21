@@ -1,6 +1,8 @@
+export {};
 declare global {
   interface Window {
-    requestIdleCallback: () => void;
-    cancelIdleCallback: () => void;
+    requestIdleCallback: (arg1: () => void) => void;
+    cancelIdleCallback: (arg1: () => void) => void;
   }
 }
+``;
