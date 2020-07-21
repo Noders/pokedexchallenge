@@ -10,7 +10,7 @@ import {
   Tema,
 } from "./Estilos";
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider theme={Tema}>
       <GlobalAppStyles />
@@ -22,6 +22,6 @@ function App() {
       </BrowserRouter>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

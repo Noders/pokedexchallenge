@@ -2,11 +2,19 @@ import React from "react";
 import { useLocalStorage } from "./localStorage";
 import { pokeAuth } from "../Servicios";
 
-const dummyArray = [];
-export const useFavoritos = () => {
+const dummyArray = [] as any[];
+
+export type AlternarFavoritoType = (id: number) => void;
+
+export type FavoritosType = Set<number>;
+
+export const useFavoritos = (): {
+  favoritos: AlternarFavoritoType;
+  alternarFavorito: FavoritosType;
+} => {
   const [favoritos, setFavoritos] = useLocalStorage("favoritos", dummyArray);
   const nuestroSetDeFavoritos = React.useMemo(() => {
-    return new Set(favoritos);
+    return new Set<number>(favoritos);
   }, [favoritos]);
 
   React.useEffect(() => {

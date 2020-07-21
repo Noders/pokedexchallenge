@@ -1,6 +1,16 @@
 import React from "react";
 
-export const useLocalStorage = (key, defaultValue) => {
+type AnyJson =
+  | boolean
+  | number
+  | string
+  | null
+  | AnyJson[]
+  | {
+      [key: string]: AnyJson;
+    };
+
+export const useLocalStorage = (key: string, defaultValue: AnyJson) => {
   const [state, setState] = React.useState(() => {
     const localStoredValue = window.localStorage.getItem(key);
     if (localStoredValue === null) {

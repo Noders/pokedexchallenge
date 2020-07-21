@@ -2,8 +2,20 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { Loading } from "../../Componentes/Loading";
-import { pokemonPageProps } from "./types";
+
 import { usePokemonFetch } from "./hooks";
+import { AlternarFavoritoType, FavoritosType } from "../../Hooks/useFavoritos";
+
+interface PropsInterna {
+  nombre: string;
+  id: string;
+  imagen: string;
+  tipos: string[];
+  esFavorito: boolean;
+  alternarFavorito: AlternarFavoritoType;
+  loading: boolean;
+  error: boolean;
+}
 
 export const PokemonPageInterna = ({
   nombre,
@@ -14,7 +26,7 @@ export const PokemonPageInterna = ({
   alternarFavorito,
   loading,
   error,
-}) => {
+}: PropsInterna) => {
   if (loading) {
     // TODO: Agregar loading de verdad
     return <Loading />;
@@ -35,12 +47,15 @@ export const PokemonPageInterna = ({
   );
 };
 
-PokemonPageInterna.propTypes = pokemonPageProps;
+interface Props {
+  alternarFavorito: AlternarFavoritoType;
+  favoritos: FavoritosType;
+}
 
-const PokemonPage = () => {
+const PokemonPage = ({ alternarFavorito, favoritos }: Props) => {
   const { nombrePokemon } = useParams();
   const { data, loading, error } = usePokemonFetch(nombrePokemon);
-  if (loading) {
+  if (loading || data === null) {
     // TODO: Agregar loading de verdad
     return <Loading />;
   }
@@ -54,8 +69,8 @@ const PokemonPage = () => {
       id={data.id.toString().padStart(3, "0")}
       imagen={data.imagen}
       tipos={data.tipos}
-      esFavorito={false}
-      alternarFavorito={() => {}}
+      esFavorito={favoritos.has(Number(data.id))}
+      alternarFavorito={alternarFavorito}
       loading={loading}
       error={error}
     />

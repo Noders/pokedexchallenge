@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import pikachu from "./tenor.gif";
 
 const ContenedorPequeno = styled.div`
@@ -34,19 +33,15 @@ const mapaLoders = {
   [tamanosLoader.grande]: ContenedorGrande,
 };
 
-export const Loading = ({ tamano = tamanosLoader.pequeno }) => {
+export const Loading = ({
+  tamano = tamanosLoader.pequeno,
+}: {
+  tamano: string;
+}) => {
   const Contenedor = mapaLoders[tamano];
   return (
     <Contenedor>
       <Imagen src={pikachu} alt="un lindo pikachu corriendo en los bosques" />
     </Contenedor>
   );
-};
-
-Loading.propTypes = {
-  tamano: PropTypes.oneOf(Object.keys(tamanosLoader)),
-};
-
-Loading.defaultProps = {
-  tamano: tamanosLoader.pequeno,
 };

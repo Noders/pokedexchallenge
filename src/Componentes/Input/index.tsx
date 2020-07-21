@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import propTypes from "prop-types";
 
 const StyledInput = styled.input`
   padding: 16px;
@@ -16,7 +15,17 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = ({ label, name, onChange, type }) => (
+const Input = ({
+  label,
+  name,
+  onChange,
+  type,
+}: {
+  label: string;
+  name: string;
+  onChange: () => void;
+  type: string;
+}) => (
   <div>
     {label && (
       <React.Fragment>
@@ -33,17 +42,5 @@ const Input = ({ label, name, onChange, type }) => (
     />
   </div>
 );
-
-Input.propTypes = {
-  type: propTypes.string,
-  label: propTypes.string,
-  onChange: propTypes.func.isRequired,
-  name: propTypes.string.isRequired,
-};
-
-Input.defaultProps = {
-  label: null,
-  type: "text",
-};
 
 export default React.memo(Input);

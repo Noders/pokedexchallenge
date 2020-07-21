@@ -1,17 +1,15 @@
 import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-
 import { getPokemonById } from "@fforres/pokemon-local-database";
-import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
+import { PokeTarjeta, mapaDeTipos } from "../../Componentes/PokeTarjeta";
+import { CardsWrapper } from "./elements";
+import { AlternarFavoritoType, FavoritosType } from "../../Hooks/useFavoritos";
 
-const CardsWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-`;
+interface Props {
+  alternarFavorito: AlternarFavoritoType;
+  favoritos: FavoritosType;
+}
 
-function Favoritos({ favoritos, alternarFavorito }) {
+function Favoritos({ favoritos, alternarFavorito }: Props) {
   return (
     <CardsWrapper>
       {favoritos.size === 0
@@ -19,7 +17,13 @@ function Favoritos({ favoritos, alternarFavorito }) {
         : Array.from(favoritos)
             .filter((idFavorito) => getPokemonById(idFavorito))
             .map((idFavorito) => {
-              const { id, name, type } = getPokemonById(idFavorito);
+              const pokemon = getPokemonById(idFavorito);
+              if (!pokemon) {
+                return null;
+              }
+              const { id, name, type } = pokemon;
+
+              const newType = type as keyof typeof mapaDeTipos;
               const parsedId = id.toString().padStart(3, "0");
               const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
               return (
@@ -37,10 +41,5 @@ function Favoritos({ favoritos, alternarFavorito }) {
     </CardsWrapper>
   );
 }
-
-Favoritos.propTypes = {
-  favoritos: PropTypes.instanceOf(Set).isRequired,
-  alternarFavorito: PropTypes.func.isRequired,
-};
 
 export default Favoritos;
