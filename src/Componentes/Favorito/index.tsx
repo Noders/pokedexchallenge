@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Estrella } from "../Svgs";
 
-const Wrapper = styled.span`
+const Wrapper = styled.span<{ esFavorito: boolean }>`
   color: ${({ esFavorito }) => (esFavorito ? "gold" : "white")};
   transition: color 150ms ease-in-out, opacity 150ms ease-in-out;
   cursor: pointer;

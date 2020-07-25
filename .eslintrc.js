@@ -52,6 +52,7 @@ module.exports = {
       },
     ],
     "@typescript-eslint/no-empty-function": 0,
+    "react/require-default-props": 0,
   },
   settings: {
     "import/parsers": {

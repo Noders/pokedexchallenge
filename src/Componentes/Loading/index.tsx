@@ -36,7 +36,7 @@ const mapaLoders = {
 export const Loading = ({
   tamano = tamanosLoader.pequeno,
 }: {
-  tamano: string;
+  tamano?: string;
 }) => {
   const Contenedor = mapaLoders[tamano];
   return (

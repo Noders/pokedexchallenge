@@ -1,6 +1,6 @@
 import React from "react";
 import { getPokemonById } from "@fforres/pokemon-local-database";
-import { PokeTarjeta, mapaDeTipos } from "../../Componentes/PokeTarjeta";
+import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { CardsWrapper } from "./elements";
 import { AlternarFavoritoType, FavoritosType } from "../../Hooks/useFavoritos";
 
@@ -22,8 +22,6 @@ function Favoritos({ favoritos, alternarFavorito }: Props) {
                 return null;
               }
               const { id, name, type } = pokemon;
-
-              const newType = type as keyof typeof mapaDeTipos;
               const parsedId = id.toString().padStart(3, "0");
               const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
               return (

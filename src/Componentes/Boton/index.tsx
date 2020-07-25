@@ -51,7 +51,7 @@ const baseButtonStyle = css`
   }
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ tipo: string }>`
   ${baseButtonStyle}
   ${(props) => {
     if (props.tipo === "secundario") {

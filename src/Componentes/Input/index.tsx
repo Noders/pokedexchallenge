@@ -19,12 +19,12 @@ const Input = ({
   label,
   name,
   onChange,
-  type,
+  type = "text",
 }: {
   label: string;
   name: string;
-  onChange: () => void;
-  type: string;
+  onChange: (evento: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
 }) => (
   <div>
     {label && (

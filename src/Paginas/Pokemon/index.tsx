@@ -2,9 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { Loading } from "../../Componentes/Loading";
-
 import { usePokemonFetch } from "./hooks";
-import { AlternarFavoritoType, FavoritosType } from "../../Hooks/useFavoritos";
+import { AlternarFavoritoType } from "../../Hooks/useFavoritos";
 
 interface PropsInterna {
   nombre: string;
@@ -47,13 +46,9 @@ export const PokemonPageInterna = ({
   );
 };
 
-interface Props {
-  alternarFavorito: AlternarFavoritoType;
-  favoritos: FavoritosType;
-}
-
-const PokemonPage = ({ alternarFavorito, favoritos }: Props) => {
+const PokemonPage = () => {
   const { nombrePokemon } = useParams();
+  // const { favoritos, alternarFavorito } = React.useContext(FavoritosContext); // <FavoritosContext.Consumer />
   const { data, loading, error } = usePokemonFetch(nombrePokemon);
   if (loading || data === null) {
     // TODO: Agregar loading de verdad

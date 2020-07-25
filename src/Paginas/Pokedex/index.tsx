@@ -59,6 +59,7 @@ function Pokedex({ alternarFavorito, favoritos }: Props) {
           onChange={(evento) => {
             setFilter(evento.target.value);
           }}
+          label="filter"
         />
       </InputWrapper>
       <CardsWrapper>{pokeTarjetasFiltradas}</CardsWrapper>

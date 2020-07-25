@@ -63,6 +63,7 @@ function Login({ token, enLoginExitoso }: Props) {
               }}
               label="Password"
               name="password"
+              type="password"
             />
           </InputWrapper>
           <ButtonWrapper>

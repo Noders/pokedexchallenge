@@ -12,6 +12,7 @@ import {
   ContenedorDeTipos,
   StyledLink,
 } from "./elements";
+import { AlternarFavoritoType } from "../../Hooks/useFavoritos";
 
 export const MapaDeTipos = {
   Fire: pokeTipos.fuego,
@@ -57,7 +58,7 @@ type Props = {
   id: string;
   imagen: string;
   tipos: string[];
-  alternarFavorito: () => void;
+  alternarFavorito: AlternarFavoritoType;
   esFavorito: boolean;
 };
 

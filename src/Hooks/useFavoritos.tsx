@@ -8,9 +8,17 @@ export type AlternarFavoritoType = (id: number) => void;
 
 export type FavoritosType = Set<number>;
 
+export const FavoritosContext = React.createContext<{
+  favoritos: FavoritosType;
+  alternarFavorito: AlternarFavoritoType;
+}>({ favoritos: new Set(), alternarFavorito: () => {} });
+FavoritosContext.displayName = "FavoritosContext";
+// Crear contexto de favoritos
+// acceder al contexto dentro el
+
 export const useFavoritos = (): {
-  favoritos: AlternarFavoritoType;
-  alternarFavorito: FavoritosType;
+  favoritos: FavoritosType;
+  alternarFavorito: AlternarFavoritoType;
 } => {
   const [favoritos, setFavoritos] = useLocalStorage("favoritos", dummyArray);
   const nuestroSetDeFavoritos = React.useMemo(() => {
