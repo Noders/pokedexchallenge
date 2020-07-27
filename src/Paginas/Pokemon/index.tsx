@@ -64,8 +64,8 @@ const PokemonPage = () => {
       id={data.id.toString().padStart(3, "0")}
       imagen={data.imagen}
       tipos={data.tipos}
-      esFavorito={favoritos.has(Number(data.id))}
-      alternarFavorito={alternarFavorito}
+      esFavorito={false}
+      alternarFavorito={() => {}}
       loading={loading}
       error={error}
     />

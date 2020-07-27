@@ -1,6 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useLocalStorage } from "./localStorage";
 import { pokeAuth } from "../Servicios";
+import { setFavoritos as reduxSetFavoritos } from "../Data/reducers";
 
 const dummyArray = [] as any[];
 
@@ -20,6 +22,7 @@ export const useFavoritos = (): {
   favoritos: FavoritosType;
   alternarFavorito: AlternarFavoritoType;
 } => {
+  const dispatch = useDispatch();
   const [favoritos, setFavoritos] = useLocalStorage("favoritos", dummyArray);
   const nuestroSetDeFavoritos = React.useMemo(() => {
     return new Set<number>(favoritos);
@@ -29,6 +32,7 @@ export const useFavoritos = (): {
     const onMount = async () => {
       const { favorites } = await pokeAuth.obtenerFavoritos();
       setFavoritos(favorites);
+      dispatch(reduxSetFavoritos(favorites));
     };
     onMount();
   }, [setFavoritos]);

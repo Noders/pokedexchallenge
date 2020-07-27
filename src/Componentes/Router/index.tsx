@@ -1,13 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import { Provider } from "react-redux";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import Pokedex from "../../Paginas/Pokedex";
 import Pokemon from "../../Paginas/Pokemon";
 import Login from "../../Paginas/Login";
 import Favoritos from "../../Paginas/Favoritos";
 import { useLocalStorage, useFavoritos } from "../../Hooks";
-import { store } from "../../Data/store";
 
 const Error404 = () => <h1>Un gatito acaba de morir</h1>;
 
@@ -21,23 +19,22 @@ const AuthenticatedRouter = ({ autenticado }: AuthenticatedRouterProps) => {
     favoritos,
     alternarFavorito,
   };
+
   return (
-    <Provider store={store}>
-      <Switch>
-        <Route path="/pokedex/:nombrePokemon">
-          <Pokemon />
-        </Route>
-        <Route path="/pokedex">
-          <Pokedex {...routeProps} />
-        </Route>
-        <Route path="/favoritos">
-          <Favoritos {...routeProps} />
-        </Route>
-        <Route path="/">
-          <Error404 />
-        </Route>
-      </Switch>
-    </Provider>
+    <Switch>
+      <Route path="/pokedex/:nombrePokemon">
+        <Pokemon />
+      </Route>
+      <Route path="/pokedex">
+        <Pokedex {...routeProps} />
+      </Route>
+      <Route path="/favoritos">
+        <Favoritos {...routeProps} />
+      </Route>
+      <Route path="/">
+        <Error404 />
+      </Route>
+    </Switch>
   );
 };
 
