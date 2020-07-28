@@ -17,3 +17,9 @@ declare global {
     cancelIdleCallback: (handle: RequestIdleCallbackHandle) => void;
   }
 }
+
+namespace reactRedux {
+  interface DefaultRootState {
+    favoritos: number[];
+  }
+}

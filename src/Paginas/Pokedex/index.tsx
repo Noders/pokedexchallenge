@@ -1,9 +1,11 @@
 import React from "react";
 import { getPokemonsByNames } from "@fforres/pokemon-local-database";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import Input from "../../Componentes/Input";
 import { AlternarFavoritoType, FavoritosType } from "../../Hooks/useFavoritos";
+import { alternarFavoritos } from "../../Data/reducers";
 
 const pokemons = getPokemonsByNames();
 
@@ -22,12 +24,13 @@ const InputWrapper = styled.div`
 const pokemonesFiltrados = pokemons.slice(0, 151);
 
 interface Props {
-  alternarFavorito: AlternarFavoritoType;
+  // alternarFavorito: AlternarFavoritoType;
   favoritos: FavoritosType;
 }
 
-function Pokedex({ alternarFavorito, favoritos }: Props) {
+function Pokedex({ favoritos }: Props) {
   const [filter, setFilter] = React.useState("");
+  const dispatch = useDispatch();
   const pokeTarjetasFiltradas = React.useMemo(
     () =>
       pokemonesFiltrados
@@ -44,11 +47,11 @@ function Pokedex({ alternarFavorito, favoritos }: Props) {
               imagen={url}
               tipos={tipos}
               esFavorito={favoritos.has(id)}
-              alternarFavorito={() => alternarFavorito(id)}
+              alternarFavorito={() => dispatch(alternarFavoritos(id))}
             />
           );
         }),
-    [alternarFavorito, favoritos, filter]
+    [dispatch, favoritos, filter]
   );
 
   return (

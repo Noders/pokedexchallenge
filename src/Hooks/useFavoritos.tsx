@@ -1,6 +1,8 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "./localStorage";
 import { pokeAuth } from "../Servicios";
+import { agregarFavoritos, RootState } from "../Data/reducers";
 
 const dummyArray = [] as any[];
 
@@ -20,7 +22,12 @@ export const useFavoritos = (): {
   favoritos: FavoritosType;
   alternarFavorito: AlternarFavoritoType;
 } => {
-  const [favoritos, setFavoritos] = useLocalStorage("favoritos", dummyArray);
+  const dispatch = useDispatch();
+  const favoritos = useSelector<RootState, number[]>(
+    (state) => state.favoritos
+  );
+  const setFavoritos = (arrayDeFavoritos: number[]) =>
+    dispatch(agregarFavoritos(arrayDeFavoritos)); // hacer un dispatch a redux para agregarFavoritos
   const nuestroSetDeFavoritos = React.useMemo(() => {
     return new Set<number>(favoritos);
   }, [favoritos]);

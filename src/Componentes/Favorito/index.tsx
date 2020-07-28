@@ -12,15 +12,17 @@ const Wrapper = styled.span<{ esFavorito: boolean }>`
   }
 `;
 
-export const Favorito = ({ onClick, esFavorito }) => (
-  <Wrapper
-    data-testid={`favorito-${esFavorito}`}
-    esFavorito={esFavorito}
-    onClick={onClick}
-  >
-    <Estrella />
-  </Wrapper>
-);
+export const Favorito = ({ onClick, esFavorito }) => {
+  return (
+    <Wrapper
+      data-testid={`favorito-${esFavorito}`}
+      esFavorito={esFavorito}
+      onClick={onClick}
+    >
+      <Estrella />
+    </Wrapper>
+  );
+};
 
 Favorito.propTypes = {
   esFavorito: PropTypes.bool.isRequired,
