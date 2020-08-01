@@ -1,44 +1,50 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import { Provider } from "react-redux";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Pokedex from "../../Paginas/Pokedex";
 import Pokemon from "../../Paginas/Pokemon";
 import Login from "../../Paginas/Login";
 import Favoritos from "../../Paginas/Favoritos";
-import { useLocalStorage, useFavoritos } from "../../Hooks";
-import { store } from "../../Data/store";
+import { useLocalStorage } from "../../Hooks";
+import { pokeAuth } from "../../Servicios";
+import { agregarFavoritos } from "../../Data/reducers";
 
 const Error404 = () => <h1>Un gatito acaba de morir</h1>;
 
-type AuthenticatedRouterProps = { autenticado: boolean };
-const AuthenticatedRouter = ({ autenticado }: AuthenticatedRouterProps) => {
-  const { favoritos, alternarFavorito } = useFavoritos();
-  if (!autenticado) {
+const AuthenticatedRouter = () => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    const onMount = async () => {
+      const { favorites } = await pokeAuth.obtenerFavoritos();
+      dispatch(agregarFavoritos(favorites));
+    };
+    onMount();
+  }, []);
+
+  return (
+    <Switch>
+      <Route path="/pokedex/:nombrePokemon">
+        <Pokemon />
+      </Route>
+      <Route path="/pokedex">
+        <Pokedex />
+      </Route>
+      <Route path="/favoritos">
+        <Favoritos />
+      </Route>
+      <Route path="/">
+        <Error404 />
+      </Route>
+    </Switch>
+  );
+};
+
+const Authentication: React.FC<{ token: string }> = ({ token }) => {
+  if (!token) {
     return <Redirect to="/login" />;
   }
-  const routeProps = {
-    favoritos,
-    alternarFavorito,
-  };
-  return (
-    <Provider store={store}>
-      <Switch>
-        <Route path="/pokedex/:nombrePokemon">
-          <Pokemon />
-        </Route>
-        <Route path="/pokedex">
-          <Pokedex {...routeProps} />
-        </Route>
-        <Route path="/favoritos">
-          <Favoritos {...routeProps} />
-        </Route>
-        <Route path="/">
-          <Error404 />
-        </Route>
-      </Switch>
-    </Provider>
-  );
+  return <AuthenticatedRouter />;
 };
 
 export const Router = () => {
@@ -59,7 +65,7 @@ export const Router = () => {
       <Route path="/tyc" exact>
         <h1>TYC</h1>
       </Route>
-      <AuthenticatedRouter autenticado={Boolean(token)} />
+      <Authentication token={token} />
     </Switch>
   );
 };

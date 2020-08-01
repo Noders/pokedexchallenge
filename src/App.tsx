@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { Provider } from "react-redux";
 import { Router } from "./Componentes/Router";
 import { Navigation } from "./Componentes/Navigation";
+import { store } from "./Data/store";
 import {
   GlobalFontStyles,
   GlobalReset,
@@ -13,13 +15,15 @@ import {
 const App = () => {
   return (
     <ThemeProvider theme={Tema}>
-      <GlobalAppStyles />
-      <GlobalReset />
-      <GlobalFontStyles />
-      <BrowserRouter>
-        <Navigation />
-        <Router />
-      </BrowserRouter>
+      <Provider store={store}>
+        <GlobalAppStyles />
+        <GlobalReset />
+        <GlobalFontStyles />
+        <BrowserRouter>
+          <Navigation />
+          <Router />
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   );
 };

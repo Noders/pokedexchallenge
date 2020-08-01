@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { Estrella } from "../Svgs";
 
 const Wrapper = styled.span<{ esFavorito: boolean }>`
@@ -12,7 +11,12 @@ const Wrapper = styled.span<{ esFavorito: boolean }>`
   }
 `;
 
-export const Favorito = ({ onClick, esFavorito }) => {
+type Props = {
+  esFavorito: boolean;
+  onClick: () => void;
+};
+
+export const Favorito = ({ onClick, esFavorito }: Props) => {
   return (
     <Wrapper
       data-testid={`favorito-${esFavorito}`}
@@ -22,9 +26,4 @@ export const Favorito = ({ onClick, esFavorito }) => {
       <Estrella />
     </Wrapper>
   );
-};
-
-Favorito.propTypes = {
-  esFavorito: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
 };

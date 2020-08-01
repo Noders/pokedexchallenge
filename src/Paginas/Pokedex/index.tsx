@@ -1,11 +1,9 @@
 import React from "react";
 import { getPokemonsByNames } from "@fforres/pokemon-local-database";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import Input from "../../Componentes/Input";
-import { AlternarFavoritoType, FavoritosType } from "../../Hooks/useFavoritos";
-import { alternarFavoritos } from "../../Data/reducers";
+import { useFavoritos } from "../../Hooks";
 
 const pokemons = getPokemonsByNames();
 
@@ -23,35 +21,26 @@ const InputWrapper = styled.div`
 
 const pokemonesFiltrados = pokemons.slice(0, 151);
 
-interface Props {
-  // alternarFavorito: AlternarFavoritoType;
-  favoritos: FavoritosType;
-}
-
-function Pokedex({ favoritos }: Props) {
+function Pokedex() {
   const [filter, setFilter] = React.useState("");
-  const dispatch = useDispatch();
+  const { isFavorito } = useFavoritos();
   const pokeTarjetasFiltradas = React.useMemo(
     () =>
       pokemonesFiltrados
         .filter(({ name }) => name.english.toLowerCase().includes(filter))
         .map((pokemon) => {
           const { name: nombre, id, type: tipos } = pokemon;
-          const parsedId = id.toString().padStart(3, "0");
-          const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
           return (
             <PokeTarjeta
               nombre={nombre.english}
               key={id}
-              id={parsedId}
-              imagen={url}
+              id={id}
               tipos={tipos}
-              esFavorito={favoritos.has(id)}
-              alternarFavorito={() => dispatch(alternarFavoritos(id))}
+              esFavorito={isFavorito(id)}
             />
           );
         }),
-    [dispatch, favoritos, filter]
+    [filter, isFavorito]
   );
 
   return (

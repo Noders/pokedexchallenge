@@ -18,6 +18,8 @@ const get = (endpoint, headers = getHeaders()) => {
   const token = JSON.parse(window.localStorage.getItem("token"));
   if (token) {
     headers.append("x-jwt-authentication-header", token);
+  } else {
+    console.error("🚨🚨🚨NO TOKEN!!!!🚨🚨🚨");
   }
   return fetch(`${config.authenticationApiEndpoint}/${endpoint}`, {
     headers,
@@ -28,6 +30,8 @@ export const remove = (endpoint, body, headers = getHeaders()) => {
   const token = JSON.parse(window.localStorage.getItem("token"));
   if (token) {
     headers.append("x-jwt-authentication-header", token);
+  } else {
+    console.error("🚨🚨🚨NO TOKEN!!!!🚨🚨🚨");
   }
   return fetch(`${config.authenticationApiEndpoint}/${endpoint}`, {
     body: JSON.stringify(body),

@@ -2,17 +2,13 @@ import React from "react";
 import { getPokemonById } from "@fforres/pokemon-local-database";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { CardsWrapper } from "./elements";
-import { AlternarFavoritoType, FavoritosType } from "../../Hooks/useFavoritos";
+import { useFavoritos } from "../../Hooks";
 
-interface Props {
-  alternarFavorito: AlternarFavoritoType;
-  favoritos: FavoritosType;
-}
-
-function Favoritos({ favoritos, alternarFavorito }: Props) {
+function Favoritos() {
+  const { isFavorito, favoritos } = useFavoritos();
   return (
     <CardsWrapper>
-      {favoritos.size === 0
+      {favoritos.length === 0
         ? "No haz marcado ningún pokémon como favorito."
         : Array.from(favoritos)
             .filter((idFavorito) => getPokemonById(idFavorito))
@@ -22,17 +18,13 @@ function Favoritos({ favoritos, alternarFavorito }: Props) {
                 return null;
               }
               const { id, name, type } = pokemon;
-              const parsedId = id.toString().padStart(3, "0");
-              const url = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
               return (
                 <PokeTarjeta
                   nombre={name.english}
                   key={idFavorito}
-                  id={parsedId}
-                  imagen={url}
+                  id={id}
                   tipos={type}
-                  esFavorito={favoritos.has(idFavorito)}
-                  alternarFavorito={() => alternarFavorito(idFavorito)}
+                  esFavorito={isFavorito(idFavorito)}
                 />
               );
             })}

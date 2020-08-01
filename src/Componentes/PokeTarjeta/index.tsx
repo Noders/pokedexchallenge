@@ -1,5 +1,4 @@
 import React from "react";
-import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Tipo, { pokeTipos } from "../Tipo";
 import { Body14 } from "../Tipografia";
@@ -12,7 +11,7 @@ import {
   ContenedorDeTipos,
   StyledLink,
 } from "./elements";
-import { AlternarFavoritoType } from "../../Hooks/useFavoritos";
+import { useFavoritos } from "../../Hooks/useFavoritos";
 
 export const MapaDeTipos = {
   Fire: pokeTipos.fuego,
@@ -55,22 +54,16 @@ const useDeferedRendering = () => {
 
 type Props = {
   nombre: string;
-  id: string;
-  imagen: string;
+  id: number;
   tipos: string[];
-  alternarFavorito: AlternarFavoritoType;
   esFavorito: boolean;
 };
 
-export function PokeTarjeta({
-  nombre,
-  id,
-  imagen,
-  tipos,
-  alternarFavorito,
-  esFavorito,
-}: Props) {
+export function PokeTarjeta({ nombre, id, tipos, esFavorito }: Props) {
   const render = useDeferedRendering();
+  const parsedId = id.toString().padStart(3, "0");
+  const imagen = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
+  const { alternarFavorito } = useFavoritos();
   return (
     <PoketarjetaWrapper data-testid="poke-tarjeta">
       {render ? (
@@ -78,9 +71,12 @@ export function PokeTarjeta({
           <PokeCabecera data-testid="poke-cabecera">
             <span>
               <StyledLink to={`/pokedex/${nombre}`}>{nombre}</StyledLink>
-              <Favorito onClick={alternarFavorito} esFavorito={esFavorito} />
+              <Favorito
+                onClick={() => alternarFavorito(id)}
+                esFavorito={esFavorito}
+              />
             </span>
-            <Body14>{`#${id}`}</Body14>
+            <Body14>{`#${parsedId}`}</Body14>
           </PokeCabecera>
           <PokeCuerpo>
             <Link to={`/pokedex/${nombre}`}>
@@ -99,13 +95,5 @@ export function PokeTarjeta({
     </PoketarjetaWrapper>
   );
 }
-PokeTarjeta.propTypes = {
-  nombre: propTypes.string.isRequired,
-  id: propTypes.string.isRequired,
-  imagen: propTypes.string.isRequired,
-  tipos: propTypes.arrayOf(propTypes.string).isRequired,
-  alternarFavorito: propTypes.func.isRequired,
-  esFavorito: propTypes.bool.isRequired,
-};
 
 export default React.memo(PokeTarjeta);

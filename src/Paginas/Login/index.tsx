@@ -34,10 +34,6 @@ function Login({ token, enLoginExitoso }: Props) {
     }
   };
 
-  if (token) {
-    return <Redirect to="/pokedex" />;
-  }
-
   return (
     <Pagina>
       <PanelWrapper>

@@ -1,10 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocalStorage } from "./localStorage";
 import { pokeAuth } from "../Servicios";
-import { agregarFavoritos, RootState } from "../Data/reducers";
-
-const dummyArray = [] as any[];
+import { setearFavoritos, RootState } from "../Data/reducers";
 
 export type AlternarFavoritoType = (id: number) => void;
 
@@ -15,51 +12,41 @@ export const FavoritosContext = React.createContext<{
   alternarFavorito: AlternarFavoritoType;
 }>({ favoritos: new Set(), alternarFavorito: () => {} });
 FavoritosContext.displayName = "FavoritosContext";
-// Crear contexto de favoritos
-// acceder al contexto dentro el
 
-export const useFavoritos = (): {
-  favoritos: FavoritosType;
-  alternarFavorito: AlternarFavoritoType;
-} => {
+export const useFavoritos = () => {
   const dispatch = useDispatch();
   const favoritos = useSelector<RootState, number[]>(
     (state) => state.favoritos
   );
-  const setFavoritos = (arrayDeFavoritos: number[]) =>
-    dispatch(agregarFavoritos(arrayDeFavoritos)); // hacer un dispatch a redux para agregarFavoritos
+  const favoritosSet = React.useMemo(() => new Set(favoritos), [favoritos]);
+
   const nuestroSetDeFavoritos = React.useMemo(() => {
     return new Set<number>(favoritos);
   }, [favoritos]);
 
-  React.useEffect(() => {
-    const onMount = async () => {
-      const { favorites } = await pokeAuth.obtenerFavoritos();
-      setFavoritos(favorites);
-    };
-    onMount();
-  }, [setFavoritos]);
-
   const alternarFavorito = React.useCallback(
-    async (idFavorito) => {
-      const localFavoritos = new Set(nuestroSetDeFavoritos);
+    async (idFavorito: number) => {
       let response;
-      if (localFavoritos.has(idFavorito)) {
+      if (nuestroSetDeFavoritos.has(idFavorito)) {
         response = pokeAuth.borrarFavorito(idFavorito);
-        localFavoritos.delete(idFavorito);
+        nuestroSetDeFavoritos.delete(idFavorito);
       } else {
         response = pokeAuth.setearFavorito(idFavorito);
-        localFavoritos.add(idFavorito);
+        nuestroSetDeFavoritos.add(idFavorito);
       }
-      setFavoritos(Array.from(localFavoritos));
+      dispatch(setearFavoritos(Array.from(nuestroSetDeFavoritos)));
       const { newFavorites } = await response;
-      setFavoritos(newFavorites);
+      dispatch(setearFavoritos(newFavorites));
     },
-    [nuestroSetDeFavoritos, setFavoritos]
+    [nuestroSetDeFavoritos, dispatch]
   );
 
-  return {
-    favoritos: nuestroSetDeFavoritos,
-    alternarFavorito,
-  };
+  const isFavorito = React.useCallback(
+    (id: number) => {
+      return favoritosSet.has(id);
+    },
+    [favoritosSet]
+  );
+
+  return { alternarFavorito, favoritos, isFavorito };
 };
