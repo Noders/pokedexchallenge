@@ -52,14 +52,19 @@ const useDeferedRendering = () => {
   return render;
 };
 
-type Props = {
+export type PokeTarjetaProps = {
   nombre: string;
   id: number;
   tipos: string[];
   esFavorito: boolean;
 };
 
-export function PokeTarjeta({ nombre, id, tipos, esFavorito }: Props) {
+export function PokeTarjeta({
+  nombre,
+  id,
+  tipos,
+  esFavorito,
+}: PokeTarjetaProps) {
   const render = useDeferedRendering();
   const parsedId = id.toString().padStart(3, "0");
   const imagen = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
@@ -85,7 +90,11 @@ export function PokeTarjeta({ nombre, id, tipos, esFavorito }: Props) {
           </PokeCuerpo>
           <ContenedorDeTipos>
             {tipos.map((tipo) => (
-              <Tipo key={tipo} tipo={MapaDeTipos[tipo]} tipo-original={tipo} />
+              <Tipo
+                key={tipo}
+                tipo={MapaDeTipos[tipo] as keyof typeof pokeTipos}
+                tipo-original={tipo}
+              />
             ))}
           </ContenedorDeTipos>
         </React.Fragment>

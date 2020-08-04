@@ -5,7 +5,7 @@ import { Loading } from "../../Componentes/Loading";
 import { usePokemonFetch } from "./hooks";
 import { useFavoritos } from "../../Hooks/useFavoritos";
 
-interface PropsInterna {
+export interface PropsInterna {
   nombre: string;
   id: number;
   tipos: string[];

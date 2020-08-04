@@ -55,7 +55,6 @@ export const Router = () => {
     <Switch>
       <Route path="/login" exact>
         <Login
-          token={token}
           enLoginExitoso={(previousToken) => {
             setToken(previousToken);
             history.push("/pokedex");

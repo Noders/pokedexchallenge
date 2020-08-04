@@ -6,9 +6,7 @@ export default {
   component: Pokedex,
 };
 
-export const DefaultPokedex = () => (
-  <Pokedex alternarFavorito={() => {}} favoritos={new Set()} />
-);
+export const DefaultPokedex = () => <Pokedex />;
 
 DefaultPokedex.story = {
   name: "Pokedex Vacio",

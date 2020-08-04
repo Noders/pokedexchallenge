@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 export const pokeTipos = {
@@ -96,7 +95,7 @@ const hada = css`
   border: 1px solid #9b6470;
 `;
 
-const StyledDiv = styled.div`
+const StyledDiv = styled.div<{ tipo: keyof typeof pokeTipos }>`
   display: inline-flex;
   flex-direction: row;
   padding: 0px 8px;
@@ -146,12 +145,8 @@ const StyledDiv = styled.div`
   }}
 `;
 
-function Tipo({ tipo }) {
+function Tipo({ tipo }: { tipo: keyof typeof pokeTipos }) {
   return <StyledDiv tipo={tipo}>{pokeTipos[tipo]}</StyledDiv>;
 }
-
-Tipo.propTypes = {
-  tipo: PropTypes.oneOf(Object.keys(pokeTipos)).isRequired,
-};
 
 export default Tipo;

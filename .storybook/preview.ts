@@ -1,26 +1,32 @@
 import { addDecorator, addParameters } from "@storybook/react";
-import { themeDecorator, globalDecorators, routerDecorator } from "./decorators";
+import {
+  themeDecorator,
+  globalDecorators,
+  routerDecorator,
+  reduxDecorator,
+} from "./decorators";
 
 const viewports = {
   kindleFire2: {
-    name: 'Kindle Fire 2',
+    name: "Kindle Fire 2",
     styles: {
-      height: '1280px',
+      height: "1280px",
     },
   },
   kindleFireHD: {
-    name: 'Kindle Fire HD',
+    name: "Kindle Fire HD",
     styles: {
-      height: '480px',
+      height: "480px",
     },
   },
 };
 addDecorator(globalDecorators);
 addDecorator(themeDecorator);
 addDecorator(routerDecorator);
+addDecorator(reduxDecorator);
 addParameters({
   viewport: {
     viewports: viewports,
-    defaultViewport: 'someDefault',
+    defaultViewport: "someDefault",
   },
 });

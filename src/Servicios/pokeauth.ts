@@ -1,8 +1,13 @@
+/* eslint-disable no-console */
 import { config } from "../config";
 import { getHeaders } from "./shared";
 // 👊 a la api
 
-const post = (endpoint, body, headers = getHeaders()) => {
+const post = (
+  endpoint: string,
+  body: { [key: string]: unknown } = {},
+  headers: Headers = getHeaders()
+) => {
   const token = JSON.parse(window.localStorage.getItem("token"));
   if (token) {
     headers.append("x-jwt-authentication-header", token);
@@ -14,7 +19,7 @@ const post = (endpoint, body, headers = getHeaders()) => {
   }).then((response) => response.json());
 };
 
-const get = (endpoint, headers = getHeaders()) => {
+const get = (endpoint: string, headers: Headers = getHeaders()) => {
   const token = JSON.parse(window.localStorage.getItem("token"));
   if (token) {
     headers.append("x-jwt-authentication-header", token);
@@ -26,7 +31,11 @@ const get = (endpoint, headers = getHeaders()) => {
   }).then((response) => response.json());
 };
 
-export const remove = (endpoint, body, headers = getHeaders()) => {
+export const remove = (
+  endpoint: string,
+  body: { [key: string]: unknown } = {},
+  headers: Headers = getHeaders()
+) => {
   const token = JSON.parse(window.localStorage.getItem("token"));
   if (token) {
     headers.append("x-jwt-authentication-header", token);
@@ -49,8 +58,8 @@ export const login = ({ usuario, password }) => {
 
 export const obtenerFavoritos = () => get(`favoritos`);
 
-export const obtenerFavorito = (id) => get(`favoritos/${id}`);
+export const obtenerFavorito = (id: number) => get(`favoritos/${id}`);
 
-export const setearFavorito = (id) => post(`favoritos/${id}`);
+export const setearFavorito = (id: number) => post(`favoritos/${id}`);
 
-export const borrarFavorito = (id) => remove(`favoritos/${id}`);
+export const borrarFavorito = (id: number) => remove(`favoritos/${id}`);

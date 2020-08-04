@@ -1,6 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
 import { Boton } from "../../Componentes/Boton";
 import Input from "../../Componentes/Input";
 import Panel from "../../Componentes/Panel";
@@ -14,11 +12,10 @@ import {
 } from "./elements";
 
 interface Props {
-  token: string;
   enLoginExitoso: (token: string) => void;
 }
 
-function Login({ token, enLoginExitoso }: Props) {
+function Login({ enLoginExitoso }: Props) {
   const [usuario, setUsuario] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -73,10 +70,5 @@ function Login({ token, enLoginExitoso }: Props) {
     </Pagina>
   );
 }
-
-Login.propTypes = {
-  enLoginExitoso: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
-};
 
 export default Login;

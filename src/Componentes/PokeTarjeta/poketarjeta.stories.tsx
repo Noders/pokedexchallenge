@@ -1,14 +1,12 @@
 import React from "react";
-import { PokeTarjeta } from "./index";
+import { PokeTarjeta, PokeTarjetaProps } from "./index";
 import { routerDecorator } from "../../../.storybook/decorators";
 import missingno from "./missingno.jpg";
 
-const pokeTarjetaProps = {
+const pokeTarjetaProps: PokeTarjetaProps = {
   nombre: "Missingno",
-  id: "123",
-  imagen: missingno,
+  id: 123,
   tipos: ["Normal"],
-  alternarFavorito: () => {},
   esFavorito: false,
 };
 

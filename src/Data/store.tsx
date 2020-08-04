@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createStore, applyMiddleware } from "redux";
 import { rootReducer } from "./reducers";
 

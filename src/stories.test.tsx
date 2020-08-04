@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import initStoryshots from "@storybook/addon-storyshots";
 import { cleanup, render } from "@testing-library/react";
 import { createSerializer } from "jest-emotion";

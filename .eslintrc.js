@@ -30,6 +30,7 @@ module.exports = {
     "import/prefer-default-export": 0,
     "prettier/prettier": "error",
     "react/jsx-fragments": 0,
+    "react/prop-types": 0,
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/jsx-filename-extension": [1, { extensions: [".jsx", ".tsx"] }],
     "import/extensions": [

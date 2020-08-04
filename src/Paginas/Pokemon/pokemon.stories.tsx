@@ -1,13 +1,10 @@
 import React from "react";
-import { PokemonPageInterna } from "./index";
-import missingno from "../../Componentes/PokeTarjeta/missingno.jpg";
+import { PokemonPageInterna, PropsInterna } from "./index";
 
-const pokemonPageProps = {
+const pokemonPageProps: PropsInterna = {
   nombre: "Missingno",
-  id: "123",
-  imagen: missingno,
+  id: 123,
   tipos: ["Normal"],
-  alternarFavorito: () => {},
   esFavorito: false,
   loading: false,
   error: false,
@@ -17,6 +14,8 @@ export default {
   title: "PokemonPage",
   component: PokemonPageInterna,
 };
+
+// could not find react - redux context value; please ensure the component is wrapped in a < Provider >
 
 export const Default = () => (
   // eslint-disable-next-line react/jsx-props-no-spreading
