@@ -1,11 +1,10 @@
 import React from "react";
-import { getPokemonsByNames } from "@fforres/pokemon-local-database";
+import { gql, useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import Input from "../../Componentes/Input";
 import { useFavoritos } from "../../Hooks";
-
-const pokemons = getPokemonsByNames();
+import { Loading, tamanosLoader } from "../../Componentes/Loading";
 
 const CardsWrapper = styled.div`
   display: flex;
@@ -19,28 +18,44 @@ const InputWrapper = styled.div`
   max-width: 100%;
 `;
 
-const pokemonesFiltrados = pokemons.slice(0, 151);
+const pokemonesQuery = gql`
+  query getPokemones {
+    pokemones {
+      nombre
+      tipos
+      id
+      imagen
+      numero
+    }
+  }
+`;
 
 function Pokedex() {
   const [filter, setFilter] = React.useState("");
   const { isFavorito } = useFavoritos();
+  const { loading, data, error } = useQuery(pokemonesQuery);
+  const pokemones = data?.pokemones || [];
   const pokeTarjetasFiltradas = React.useMemo(
     () =>
-      pokemonesFiltrados
-        .filter(({ name }) => name.english.toLowerCase().includes(filter))
+      pokemones // array de pokemones
+        .filter(({ nombre }) =>
+          nombre.toLowerCase().includes(filter.toLowerCase())
+        )
         .map((pokemon) => {
-          const { name: nombre, id, type: tipos } = pokemon;
+          const { nombre, id, numero, tipos, imagen } = pokemon;
           return (
             <PokeTarjeta
-              nombre={nombre.english}
+              nombre={nombre}
               key={id}
               id={id}
               tipos={tipos}
+              imagen={imagen}
+              numero={numero}
               esFavorito={isFavorito(id)}
             />
           );
         }),
-    [filter, isFavorito]
+    [filter, isFavorito, pokemones]
   );
 
   return (
@@ -54,7 +69,11 @@ function Pokedex() {
           label="filter"
         />
       </InputWrapper>
-      <CardsWrapper>{pokeTarjetasFiltradas}</CardsWrapper>
+      {loading ? (
+        <Loading tamano={tamanosLoader.grande} />
+      ) : (
+        <CardsWrapper>{pokeTarjetasFiltradas}</CardsWrapper>
+      )}
     </React.Fragment>
   );
 }

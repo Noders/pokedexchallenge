@@ -4,10 +4,12 @@ import { PokemonPageInterna, PropsInterna } from "./index";
 const pokemonPageProps: PropsInterna = {
   nombre: "Missingno",
   id: 123,
+  numero: 123,
   tipos: ["Normal"],
   esFavorito: false,
   loading: false,
   error: false,
+  imagen: "",
 };
 
 export default {

@@ -24,7 +24,7 @@ const AuthenticatedRouter = () => {
 
   return (
     <Switch>
-      <Route path="/pokedex/:nombrePokemon">
+      <Route path="/pokedex/:idPokemon">
         <Pokemon />
       </Route>
       <Route path="/pokedex">

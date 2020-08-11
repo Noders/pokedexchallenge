@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { Loading } from "../../Componentes/Loading";
 import { usePokemonFetch } from "./hooks";
@@ -12,6 +13,8 @@ export interface PropsInterna {
   esFavorito: boolean;
   loading: boolean;
   error: boolean;
+  imagen: string;
+  numero: number;
 }
 
 export const PokemonPageInterna = ({
@@ -21,6 +24,8 @@ export const PokemonPageInterna = ({
   esFavorito,
   loading,
   error,
+  imagen,
+  numero,
 }: PropsInterna) => {
   if (loading) {
     // TODO: Agregar loading de verdad
@@ -32,34 +37,46 @@ export const PokemonPageInterna = ({
   }
   return (
     <PokeTarjeta
+      imagen={imagen}
       nombre={nombre}
       id={id}
       tipos={tipos}
+      numero={numero}
       esFavorito={esFavorito}
     />
   );
 };
 
+const getPokemonById = gql`
+  query getPokemonById($pokemonId: Int) {
+    pokemonById(id: $pokemonId) {
+      nombre
+      tipos
+      id
+      imagen
+      numero
+    }
+  }
+`;
+
 const PokemonPage = () => {
-  const { nombrePokemon } = useParams();
+  const { idPokemon } = useParams();
   const { isFavorito } = useFavoritos();
-  const { data, loading, error } = usePokemonFetch(nombrePokemon);
-  if (loading || data === null) {
-    // TODO: Agregar loading de verdad
-    return <Loading />;
-  }
-  if (error) {
-    // TODO: Agregar ERROR de verdad
-    return <div>...ERROR!!!</div>;
-  }
+
+  const { loading, data, error } = useQuery(getPokemonById, {
+    variables: { pokemonId: Number(idPokemon) },
+  });
+  const pokemon = data?.pokemonById;
   return (
     <PokemonPageInterna
-      nombre={data.nombre}
-      id={Number(data.id)}
-      tipos={data.tipos}
-      esFavorito={isFavorito(Number(data.id))}
-      loading={loading}
-      error={error}
+      nombre={pokemon?.nombre}
+      id={Number(pokemon?.id)}
+      tipos={pokemon?.tipos}
+      numero={pokemon?.numero}
+      esFavorito={isFavorito(pokemon?.numero)}
+      loading={loading || !pokemon}
+      error={Boolean(error)}
+      imagen={pokemon?.imagen}
     />
   );
 };

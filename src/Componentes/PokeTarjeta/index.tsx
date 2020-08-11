@@ -56,6 +56,8 @@ export type PokeTarjetaProps = {
   nombre: string;
   id: number;
   tipos: string[];
+  imagen: string;
+  numero: number;
   esFavorito: boolean;
 };
 
@@ -64,10 +66,11 @@ export function PokeTarjeta({
   id,
   tipos,
   esFavorito,
+  numero,
+  imagen,
 }: PokeTarjetaProps) {
   const render = useDeferedRendering();
   const parsedId = id.toString().padStart(3, "0");
-  const imagen = `https://raw.githubusercontent.com/fforres/pokemon-local-database/master/src/data/thumbnails/${parsedId}.png`;
   const { alternarFavorito } = useFavoritos();
   return (
     <PoketarjetaWrapper data-testid="poke-tarjeta">
@@ -75,7 +78,7 @@ export function PokeTarjeta({
         <React.Fragment>
           <PokeCabecera data-testid="poke-cabecera">
             <span>
-              <StyledLink to={`/pokedex/${nombre}`}>{nombre}</StyledLink>
+              <StyledLink to={`/pokedex/${numero}`}>{nombre}</StyledLink>
               <Favorito
                 onClick={() => alternarFavorito(id)}
                 esFavorito={esFavorito}

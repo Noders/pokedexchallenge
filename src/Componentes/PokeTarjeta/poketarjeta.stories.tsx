@@ -8,6 +8,8 @@ const pokeTarjetaProps: PokeTarjetaProps = {
   id: 123,
   tipos: ["Normal"],
   esFavorito: false,
+  numero: 123,
+  imagen: missingno,
 };
 
 export default {
