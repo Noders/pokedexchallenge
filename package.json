@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "apollo": "^2.30.2",
     "cors": "^2.8.5",
     "graphql": "^15.3.0",
     "history": "^5.0.0",
@@ -34,7 +35,9 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "now-build": "npm run lint && npm run test:coverage && npm run build",
-    "chromatic": "npx chromatic --project-token=kq4syj0xiuq"
+    "chromatic": "npx chromatic --project-token=kq4syj0xiuq",
+    "types:generate": "yarn run apollo client:codegen --target=typescript --globalTypesFile=src/__generated__/globalTypes.ts -c=apollo.config.js",
+    "types:download": "yarn run apollo schema:download --endpoint=https://pokeapi.noders.live/api/graphql"
   },
   "eslintConfig": {
     "extends": "react-app"

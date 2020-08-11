@@ -1,10 +1,12 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import Input from "../../Componentes/Input";
 import { useFavoritos } from "../../Hooks";
 import { Loading, tamanosLoader } from "../../Componentes/Loading";
+import { pokemonesQuery } from "./queries";
+import { getAllPokemones } from "./__generated__/getAllPokemones";
 
 const CardsWrapper = styled.div`
   display: flex;
@@ -18,22 +20,10 @@ const InputWrapper = styled.div`
   max-width: 100%;
 `;
 
-const pokemonesQuery = gql`
-  query getPokemones {
-    pokemones {
-      nombre
-      tipos
-      id
-      imagen
-      numero
-    }
-  }
-`;
-
 function Pokedex() {
   const [filter, setFilter] = React.useState("");
   const { isFavorito } = useFavoritos();
-  const { loading, data, error } = useQuery(pokemonesQuery);
+  const { loading, data, error } = useQuery<getAllPokemones>(pokemonesQuery);
   const pokemones = data?.pokemones || [];
   const pokeTarjetasFiltradas = React.useMemo(
     () =>
@@ -47,11 +37,11 @@ function Pokedex() {
             <PokeTarjeta
               nombre={nombre}
               key={id}
-              id={id}
+              id={numero}
               tipos={tipos}
               imagen={imagen}
               numero={numero}
-              esFavorito={isFavorito(id)}
+              esFavorito={isFavorito(numero)}
             />
           );
         }),

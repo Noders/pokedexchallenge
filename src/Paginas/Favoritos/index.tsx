@@ -1,26 +1,15 @@
 import React from "react";
-// import { getPokemonById } from "@fforres/pokemon-local-database";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { CardsWrapper } from "./elements";
 import { useFavoritos } from "../../Hooks";
 import { Loading, tamanosLoader } from "../../Componentes/Loading";
-
-const pokemonesQuery = gql`
-  query getPokemones {
-    pokemones {
-      nombre
-      tipos
-      id
-      numero
-      imagen
-    }
-  }
-`;
+import { pokemonesQuery } from "./queries";
+import { getPokemones } from "./__generated__/getPokemones";
 
 function Favoritos() {
   const { isFavorito, favoritos } = useFavoritos();
-  const { loading, data, error } = useQuery(pokemonesQuery);
+  const { loading, data, error } = useQuery<getPokemones>(pokemonesQuery);
   if (loading) {
     return <Loading tamano={tamanosLoader.grande} />;
   }

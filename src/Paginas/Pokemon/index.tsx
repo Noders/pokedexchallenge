@@ -1,10 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { PokeTarjeta } from "../../Componentes/PokeTarjeta";
 import { Loading } from "../../Componentes/Loading";
-import { usePokemonFetch } from "./hooks";
 import { useFavoritos } from "../../Hooks/useFavoritos";
+import { getPokemonById } from "./queries";
+import {
+  getPokemonById as PokemonById,
+  getPokemonByIdVariables,
+} from "./__generated__/getPokemonById";
 
 export interface PropsInterna {
   nombre: string;
@@ -47,23 +51,14 @@ export const PokemonPageInterna = ({
   );
 };
 
-const getPokemonById = gql`
-  query getPokemonById($pokemonId: Int) {
-    pokemonById(id: $pokemonId) {
-      nombre
-      tipos
-      id
-      imagen
-      numero
-    }
-  }
-`;
-
 const PokemonPage = () => {
   const { idPokemon } = useParams();
   const { isFavorito } = useFavoritos();
 
-  const { loading, data, error } = useQuery(getPokemonById, {
+  const { loading, data, error } = useQuery<
+    PokemonById,
+    getPokemonByIdVariables
+  >(getPokemonById, {
     variables: { pokemonId: Number(idPokemon) },
   });
   const pokemon = data?.pokemonById;
